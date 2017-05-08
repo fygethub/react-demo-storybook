@@ -99,8 +99,61 @@ export default Routers;
 └── styles
 ```
 
+## 在create-react-app 中通过` .eslintrc `配置文件配置 eslint
+通过运行<font color=deepPink >`npm run eject`</font>使其暴露webpack等配置文件
+##[自定义eslint 原文连接](https://segmentfault.com/a/1190000008853805)
+> 上述步骤并没有暴露react脚手架封装的eslint操作，为了使得项目统一规范化，添加jsx-eslint操作是非常不错的选择（关于js其他的eslint操作，请参见官网，本文主要针对jsx限制规范配置）。
+
+* 在项目根目录下添加.eslintrc文件
+* 在根目录找到config文件夹，并找到文件夹下的webpack.config.dev.js文件
+* webpack.config.dev.js文件修改添加如下代码
+```
+    preLoaders: [
+          {
+            test: /\.(js|jsx)$/,
+            loader: 'eslint',
+              enforce: 'pre',
+              use: [{
+                  // @remove-on-eject-begin
+                  // Point ESLint to our predefined config.
+                  options: {
+                      //configFile: path.join(__dirname, '../.eslintrc'),
+                      useEslintrc: true
+                  },
+                  // @remove-on-eject-end
+                  loader: 'eslint-loader'
+              }],
+            include: paths.appSrc,
+          }
+        ],
+
+```
+.运行npm start,此时，你编写的jsx文件都是经过.eslintrc的配置限制
+<font color=deepPink> `ps: 配置的value对应的值： 0 : off 1 : warning 2 : error`</font>
+不满足以下的规范设置的，编译代码时将有黄色提示
+<font color=deepPink> 
+<pre>
+    "extends": "react-app",
+           "rules": {
+             "no-multi-spaces": 1,
+             "react/jsx-space-before-closing": 1,        // 总是在自动关闭的标签前加一个空格，正常情况下也不需要换行
+             "jsx-quotes": 1,
+             "react/jsx-closing-bracket-location": 1,    // 遵循JSX语法缩进/格式
+             "react/jsx-boolean-value": 1,               // 如果属性值为 true, 可以直接省略
+             "react/no-string-refs": 1,      // 总是在Refs里使用回调函数
+             "react/self-closing-comp": 1,    // 对于没有子元素的标签来说总是自己关闭标签
+             "react/jsx-no-bind": 1,          // 当在 render() 里使用事件处理方法时，提前在构造函数里把 this 绑定上去
+             "react/sort-comp": 1,            // 按照具体规范的React.createClass 的生命周期函数书写代码
+             "react/jsx-pascal-case": 1        // React模块名使用帕斯卡命名，实例使用骆驼式命名
+           }
+         }
+</pre>
+</font>
 
 
+## 通过material UI 去对页面布局
+* 书籍详情页
+* 查询列表页
 
 
 

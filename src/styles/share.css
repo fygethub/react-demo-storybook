@@ -1,0 +1,9 @@
+@import "variables.css";
+.share{
+    position: relative;
+
+}
+.share span {
+    color: var(--default-color);
+    font-size: var(--font-size-md);
+}

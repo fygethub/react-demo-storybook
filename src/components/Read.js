@@ -5,8 +5,8 @@ class Read extends Component {
         const { match } = this.props;
         console.log(match);
         return (
-            <div>Read<br/>
-                <Link to='/'>main</Link></div>
+            <div>Read<br />
+                <Link to="/">main</Link></div>
         )
     }
 }

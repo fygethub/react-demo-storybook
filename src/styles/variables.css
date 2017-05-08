@@ -1,0 +1,68 @@
+:root {
+    --lineheight: 200%;
+    --default-color: #fff;
+    --align: center;
+
+    /* Colors */
+    --gray-dark:                 #373a3c;
+    --gray:                      #55595c;
+    --gray-light:                #818a91;
+    --gray-lighter:              #eceeef;
+    --gray-lightest:             #f7f7f9;
+
+
+
+    --brand-primary:             #15b6e4;
+    --brand-success:             #5cb85c;
+    --brand-info:                #005faf;
+    --brand-warning:             #f0ad4e;
+    --brand-danger:              #ff3800;
+    --brand-white:               #fff;
+
+    /*Body*/
+    --body-bg:                   #fff;
+    --body-color:                color(var(--body-bg) contrast(50%));
+
+    /*Links*/
+    --link-color:                var(--brand-info);
+    --link-hover-color:          color(var(--link-color) lightness(-25%));
+
+    /*Font*/
+    --font-family-sans-serif:     "微软雅黑", "宋体", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-family-serif:          Georgia, "Times New Roman", Times, serif;
+    --font-family-monospace:      Menlo, Monaco, Consolas, "Courier New", monospace;
+    --font-family-base:           var(--font-family-sans-serif);
+
+
+    --ratio: 1.2;
+    --base: 1;
+    --ms1: var(--ratio);                    /* 1.2   */
+    --ms2: calc(var(--ratio) * var(--ms1)); /* 1.44  */
+    --ms3: calc(var(--ratio) * var(--ms2)); /* 1.728 */
+    --ms4: calc(var(--ratio) * var(--ms3)); /* 2.074 */
+
+    --font-size-root: 14px;
+    --font-size-root-sm:          12px;
+    --font-size-base:             1rem;
+    --font-size-xs:               calc(var(--font-size-base) / var(--ms1));
+    --font-size-md:               calc(var(--ms1) * var(--font-size-base));
+    --font-size-lg:               calc(var(--ms2) * var(--font-size-base));
+    --font-size-xl:               calc(var(--ms3) * var(--font-size-base));
+    --font-size-xxl:              calc(var(--ms4) * var(--font-size-base));
+
+
+    --line-height:                calc(var(--base) * var(--ms2));
+
+    --list-height: 3rem;
+}
+
+
+@import "./font/font.css";
+
+.font-red{
+    color: var(--brand-danger);
+}
+
+.font-grey-light{
+    color: var(--gray-light);
+}

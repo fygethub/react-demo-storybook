@@ -1,0 +1,71 @@
+@import "variables.css";
+
+.bookNav{
+    border-bottom: 1px solie var(--gray-lighter);
+    display:flex;
+    padding: 1rem;
+}
+
+.imgDiv{
+    width:6rem;
+    height:6rem;
+    margin-right:2rem;
+}
+
+.imgDiv img{
+    width: 100%;
+    height: 100%;
+}
+
+.imgIntro{
+    padding-top:1rem;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
+    border-top:1px solid var(--gray-lighter);
+    border-bottom:1px solid var(--gray-lighter);
+    padding:3rem 0;
+}
+
+.button-container{
+    width: 50%;
+    display:flex;
+    justify-content: center;
+    padding:0 3rem;
+}
+
+.detailIntro{
+    width:100%;
+    overflow:hidden;
+    margin-top:1rem;
+    border-bottom:1px solid var(--gray-lighter);
+}
+
+.detailIntro dl{
+    float:left;
+    width: 33.33%;
+}
+
+.detailIntro dl dd,.detailIntro dl dt{
+    text-align: center;
+    margin:0;
+}
+
+article header{
+    border-bottom: 1px solid var(--gray-lighter);
+}
+article p{
+    padding: 1rem;
+    text-indent: 2rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 13;
+    overflow:hidden;
+    -webkit-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    width: 100%;
+}
+
+

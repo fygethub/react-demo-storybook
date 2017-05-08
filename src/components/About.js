@@ -5,8 +5,8 @@ export default class About extends Component {
         return (
             <div>
                 About
-                <br/>
-                <Link to='/'>main</Link>
+                <br />
+                <Link to="/">main</Link>
             </div>
         )
     }

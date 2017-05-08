@@ -13,7 +13,7 @@ const Routers = () => (
         <Switch>
             {
                 routes.map((route,i)=> (
-                   <Route key={i} path={route.path} exact={route.exact} component={route.component}/>
+                   <Route key={i} path={route.path} exact={route.exact} component={route.component} />
                 ))
             }
         </Switch>

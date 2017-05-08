@@ -1,0 +1,27 @@
+@import "./variables.css";
+
+
+.bookListItem{
+    padding:.5rem .5rem 1rem;
+    border-bottom:1px solid var(--gray-light);
+}
+.bookListItem a {
+    display: block;
+    width:100%;
+    overflow: hidden;
+}
+
+.bookListItem a div{
+    float: left;
+}
+
+.itemImg{
+    width:5rem;
+    height:5rem;
+}
+.bookIntro{
+    padding:1rem;
+}
+.subTitle{
+    color: var(--gray-light);
+}
