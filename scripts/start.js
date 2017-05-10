@@ -221,6 +221,23 @@ function addMiddleware(devServer) {
 
 function runDevServer(host, port, protocol) {
   var devServer = new WebpackDevServer(compiler, {
+      proxy: {
+          '/api': {
+              target: 'http://api.zhuishushenqi.com/',
+              pathRewrite: {'^/api' : '/'},
+              changeOrigin: true
+          },
+          '/chapter': {
+              target: 'http://chapter2.zhuishushenqi.com/',
+              pathRewrite: {'^/chapter' : '/chapter'},
+              changeOrigin: true
+          },
+          '/book/': {
+              target: 'http://api.zhuishushenqi.com/',
+              pathRewrite: {'^/book': '/book'},
+              changeOrigin: true
+          }
+      },
     // Enable gzip compression of generated files.
     compress: true,
     // Silence WebpackDevServer's own logs since they're generally not useful.

@@ -155,10 +155,263 @@ export default Routers;
 * 书籍详情页
 * 查询列表页
 
+## 页面写好了以后肯定就是写功能了，功能我们不上一次性去写完而是用到什么添加什么
+ 目前书籍搜索页面布局好了以后开始添加功能,不知不觉自己的文件就变得多了。
+ 
+ 这里普及一下生成图形目录的工具 用的是tree 工具
+ > 直接tree -I "node_modules|dist" 就出来了 😄 当然需要安装 这里链接一篇[mac上使用tree命令生成树状目录](http://qingtong234.github.io/2016/01/07/mac%E4%B8%8A%E4%BD%BF%E7%94%A8tree%E5%91%BD%E4%BB%A4%E7%94%9F%E6%88%90%E6%A0%91%E7%8A%B6%E7%9B%AE%E5%BD%95/)
+
+ ```
+    
+├── README.md
+├── config // 配置文件 create-react-app配置 缺少自己想要的功能就在上面添加
+│   ├── env.js
+│   ├── jest
+│   ├── paths.js
+│   ├── polyfills.js
+│   ├── webpack.config.dev.js 
+│   └── webpack.config.prod.js
+├── package.json
+├── scripts  // node 启动文件
+│   ├── build.js
+│   ├── start.js // 启动文件 配置自己的转发可以在这里配置 如devserver的proxy
+│   └── test.js
+├── src
+│   ├── App.js
+│   ├── App.test.js
+│   ├── components
+│   │   ├── About.js
+│   │   ├── BookIntro.js
+│   │   ├── ChangeOrigin.js
+│   │   ├── Main.js
+│   │   ├── Read.js
+│   │   ├── Search.js //只是一个简单的搜索页面返回按钮
+│   │   └── commont
+│   │       ├── Loading.js
+│   │       ├── ReturnButton.js   //只是一个简单的返回按钮
+│   │       └── Share.js  //只是一个简单的分享按钮
+│   ├── index.js
+│   ├── redux
+│   │   ├── action.js
+│   │   ├── middleware   // 这里是redux middleware 写的logmiddle 和 thunk ，当然也有人家写好了的自行github
+│   │   │   └── middleware.js
+│   │   ├── reducer.js
+│   │   └── store.js 
+│   ├── router
+│   │   ├── Routers.js
+│   │   └── router.config.js
+│   ├── source
+│   ├── styles
+│   │   ├── animate.css
+│   │   ├── bookIntro.css
+│   │   ├── font     // 配置iconfont 这里使用的阿里 👌
+│   │   │   └── font.css
+│   │   ├── loading.css
+│   │   ├── reset.css  
+│   │   ├── search.css
+│   │   ├── share.css
+│   │   └── variables.css
+│   └── tools
+│       └── index.js
+└── yarn.lock
+
+```
+##编写需要用到的action
+> 这里目前用到的action有获取书籍列表receiveBookList 是否显示加载框 isShowLoading
+自动不全 autoComplete 以上都是同步action 
+```typescript jsx
+import 'whatwg-fetch';
+import { urlChange } from '../tools';
+
+export const IS_LOADING = 'IS_LOADING';
+export const GET_BOOK_LIST = 'GET_BOOK_LIST';
+export const AUTO_COMPLETE = 'AUTO_COMPLETE';
+
+const receiveBookList = (data, name) => ({
+    type: GET_BOOK_LIST,
+    searchData: data,
+    name: name
+});
+
+export const isShowLoading = (isloading) => ({
+    type: IS_LOADING,
+    isloading
+});
+
+export const autoComplete = (name, completeList) => ({
+    type: AUTO_COMPLETE,
+    name,
+    completeList
+});
 
 
 
+```
+ ### 异步action 这里分发异步action需要用到 middleware 作用是dispatch的时候可以传除对象外还可以是函数
+ 下面是middleware src/redux/middleware/middleware.js
+```typescript jsx
+export const thunk = (store) => next => action =>
+        typeof action === 'function' ?
+            action(store.dispatch, store.getState) :
+            next(action);
 
+export const logger = (store) => next => action => {
+      console.group(action.type);
+      console.info('dispatching', action);
+      let result = next(action);
+      console.log('next state', store.getState());
+      console.groupEnd(action.type);
+      return result;
+}
+
+
+>有了上面的middleware 就可以编写异步action了同样在 src/redux/action.js中添加
+```typescript jsx
+export const receiveAutoComplete = name => dispatch =>
+    fetch(`book/auto-complete?query=${name}`)
+        .then(res=>res.json())
+        .then(data => dispatch(autoComplete(name,data.keywords)))
+        .catch(error => new Error(error));
+
+
+
+export const getBookList = (name) => dispatch => {
+        dispatch(isShowLoading(true));
+        return fetch(`/api/book/fuzzy-search?query=${name}&start=0`)
+            .then(res => res.json())
+            .then(data => data.books.map((book) => urlChange(book.cover)))
+            .then(data => {
+                let action = dispatch(receiveBookList(data,name));
+                dispatch(isShowLoading(false));
+                return action;
+            })
+            .catch(error => {
+                new Error(error);
+            })
+        };
+
+```
+
+> action编写完毕 接下来就应该编写reducer ，reducer意思是铜鼓action计算出下次的state由于我们会用到<font color=deepPink>conbinereducer</font>所以
+可以向下面的方式编写
+src/redux/reducer.js
+```typescript jsx
+import { IS_LOADING, GET_BOOK_LIST, AUTO_COMPLETE } from './action';
+
+export const bookList = (state = {books:[], name: ''},action={}) => {
+    switch (action.type){
+        case GET_BOOK_LIST:
+            let { books, name } = action;
+            return {name,books}
+        default:
+            return state;
+    }
+}
+
+export const autoBookList = (state = {lists : [],name : '' }, action) => {
+   switch (action.type){
+       case AUTO_COMPLETE:
+            let { completeList, name} = action;
+            return {lists:completeList, name};
+       default: return state;
+   }
+
+}
+
+export const isLoading = (state = false,action) => {
+    switch(action.type){
+        case IS_LOADING:
+            return action.isloading;
+        default:
+            return state;
+    }
+}
+
+
+```
+
+##生成store
+底层步骤写完后下面就开始创建出我们需要的store了,创建store需要<font color=deepPink>redux 里面的方法</font>
+```typescript jsx
+
+//src/redux/store.js
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import * as reducer from './reducer';
+import { thunk, logger} from './middleware/middleware';
+
+let store = createStore(
+    combineReducers(reducer),
+    applyMiddleware(thunk,logger));
+
+export default store;
+
+```
+##好了该有的方法我们都创建完毕在App文件中来测试一下❤先 ， 跟着我默念一遍咒语
+> 神兽保佑🙏代码一次过
+
+```typescript jsx
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
+import { Provider } from 'react-redux';
+import Routes from './router/Routers'
+import darkBaseTheme from "material-ui/styles/baseThemes/lightBaseTheme";
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import './styles/reset.css';
+import { receiveAutoComplete, getBookList} from './redux/action';
+import Loading from './components/commont/Loading';
+import store from './redux/store';
+
+store.subscribe(() =>
+    console.log(store.getState())
+)
+
+store.dispatch(receiveAutoComplete('he'));
+
+setTimeout(function () {
+    store.dispatch(receiveAutoComplete('大'));
+},1000)
+
+setTimeout(function () {
+    store.dispatch(getBookList('hello world'));
+},2000)
+
+
+/*引用tap事件适配移动端*/
+injectTapEventPlugin();
+
+class App extends Component {
+
+  /*material-ui 需要配置主题才可以使用*/
+  getChildContext() {
+      return { muiTheme: getMuiTheme(darkBaseTheme) };
+  }
+
+  render() {
+    return (
+        <Provider store={store}>
+          <div className="App">
+                <Loading/>
+                <Routes />
+          </div>
+        </Provider>
+    );
+  }
+}
+
+App.childContextTypes = {
+    muiTheme: PropTypes.object.isRequired,
+};
+
+export default App;
+
+```
+
+## <font color=deepPink> 代码跑起来 npm start</font>
+看到我们的控制台发现有个小警告说闭合标签前面需要有一个空格 果断跑去加一个 ![pic](githubImgs/测试redux逻辑.png);
+
+在看一次我们的请求都发出去了，reducer也接收到action后为我们处理了。
+![](githubImgs/测试redux.png);
 
 
 
