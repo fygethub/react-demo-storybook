@@ -83,10 +83,6 @@ VertMenu.muiName = 'IconMenu';
 
 /*搜索结果列表*/
 class BookListItem extends Component {
-    constructor(props){
-        super(props);
-    }
-
     render() {
         const { item } = this.props;
         const { imgUrl, hTitle, subTitle } = item;
@@ -94,7 +90,7 @@ class BookListItem extends Component {
             <li className="bookListItem">
                 <a>
                     <div>
-                        <img src={imgUrl} alt="img" className="itemImg"/>
+                        <img src={imgUrl} alt="img" className="itemImg" />
                     </div>
                     <div className="bookIntro">
                         <h3>{hTitle}</h3>
