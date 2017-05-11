@@ -415,3 +415,68 @@ export default App;
 
 
 
+## 继续编写搜索页面并优化
+*  点击搜索发送一个搜索action reducer处理后search组件获取到书籍数据显示到列表
+* 优化书籍自动补全时候输入框每输入一个字符都要发送action 增加一个延时发送效果<font color=deepPink>主要方法：当输入停止后350毫秒搜索，每当输入时都清除定时器然后在添加一个定时器</font>
+```typescript jsx
+    constructor(props){
+            super(props);
+            this.state = {
+                searchText:''
+            }
+            this.inputTimer = 0;
+        }
+    handleSearchAutoComplete = () => {
+        const { dispatch } = this.props;
+        dispatch(getBookList(this.state.searchText));
+    }
+
+    /*输入框延处理*/
+    handleAutoSearchDelay = (time) => {
+        const { dispatch } = this.props;
+        this.inputTimer = setTimeout( () => {
+            dispatch(receiveAutoComplete(this.state.searchText));
+        },time);
+    }
+```
+* 为了不让每次刷新时候都render 页面这里用了<font color=deepPink> decorator 相当于java的注解 AOP</font> ES7 的提议方法大家可以自行google一下
+```typescript jsx
+//只需要在类上面添加 @PureRender 就可以自动注入方法
+@PureRender
+class AutoCompleteClass extends Component {}
+```
+
+##下面是一个实现的方法，也可以解释为 <font color=deepPink>[高阶函数Higher Order Components ](https://medium.com/@franleplant/react-higher-order-components-in-depth-cf9032ee6c3e)</font>
+```typescript jsx
+
+//src/tools/decorators.js
+function shalloEqual(next,prev) {
+    if(prev === next) return true;
+    const prevKes = Object.keys(prev);
+    const nextKes = Object.keys(next);
+    if(prevKes.length !== nextKes.length) return false;
+    return prevKes.every((key)=>prev.hasOwnProperty(key) && prev[key] === next[key]);
+}
+
+
+function PureRender(Component) {
+    if(!Component.prototype.shouldComponentUpdate){
+        Component.prototype.shouldComponentUpdate = function (nextProps, nextState) {
+            console.group('start equal component props and state');
+            let isRender = PureRender.prototype.shouldComponentUpdate(nextProps,nextState,this.props,this.state);
+            console.info('the equal result is  :' + isRender);
+            console.groupEnd();
+            return isRender
+        }
+    }
+}
+
+
+PureRender.prototype.shouldComponentUpdate = function(nextProps,nextState,prevProp,prevState){
+    return !shalloEqual(nextProps,prevProp) || !shalloEqual(nextState,prevState);
+}
+
+
+export default PureRender;
+
+```

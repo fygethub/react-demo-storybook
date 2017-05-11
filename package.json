@@ -8,7 +8,11 @@
     "babel-eslint": "7.1.1",
     "babel-jest": "18.0.0",
     "babel-loader": "6.2.10",
+    "babel-plugin-import": "^1.1.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react-app": "^2.2.0",
+    "babel-preset-stage-0": "^6.24.1",
     "babel-runtime": "^6.20.0",
     "case-sensitive-paths-webpack-plugin": "1.1.4",
     "chalk": "1.1.3",
@@ -44,7 +48,6 @@
   },
   "dependencies": {
     "antd": "^2.9.3",
-    "babel-plugin-import": "^1.1.1",
     "material-ui": "^0.18.0",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
@@ -53,6 +56,7 @@
     "react-router-dom": "^4.1.1",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
+    "storejs": "^1.0.15",
     "whatwg-fetch": "^2.0.2"
   },
   "scripts": {
@@ -86,8 +90,21 @@
   },
   "babel": {
     "presets": [
-      "react-app"
-    ]
+      "react-app",
+      "stage-0"
+    ],
+    "plugins": [
+      "transform-decorators-legacy"
+    ],
+    "env": {
+      "test": {
+        "presets": [
+          "es2015",
+          "react",
+          "stage-0"
+        ]
+      }
+    }
   },
   "eslintConfig": {
     "extends": "react-app"

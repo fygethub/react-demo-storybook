@@ -7,7 +7,7 @@ export const AUTO_COMPLETE = 'AUTO_COMPLETE';
 
 const receiveBookList = (data, name) => ({
     type: GET_BOOK_LIST,
-    searchData: data,
+    books: data,
     name: name
 });
 
@@ -16,17 +16,22 @@ export const isShowLoading = (isloading) => ({
     isloading
 });
 
-export const autoComplete = (name, completeList) => ({
+export const autoComplete = (name='', completeList=[]) => ({
     type: AUTO_COMPLETE,
     name,
     completeList
 });
 
-export const receiveAutoComplete = name => dispatch =>
-    fetch(`book/auto-complete?query=${name}`)
+export const receiveAutoComplete = name => dispatch =>{
+    if(name === '') {
+        return dispatch(autoComplete());
+    }
+    return fetch(`book/auto-complete?query=${name}`)
         .then(res=>res.json())
         .then(data => dispatch(autoComplete(name,data.keywords)))
         .catch(error => new Error(error));
+}
+
 
 
 
@@ -34,7 +39,9 @@ export const getBookList = (name) => dispatch => {
         dispatch(isShowLoading(true));
         return fetch(`/api/book/fuzzy-search?query=${name}&start=0`)
             .then(res => res.json())
-            .then(data => data.books.map((book) => urlChange(book.cover)))
+            .then(data => data.books.map((book) =>{
+                return Object.assign({}, book,{cover:urlChange(book.cover)})
+            }))
             .then(data => {
                 let action = dispatch(receiveBookList(data,name));
                 dispatch(isShowLoading(false));
