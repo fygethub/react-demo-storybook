@@ -78,13 +78,3 @@ hr {
     border-top: 1px solid #eee;
     margin: 0;
 }
-
-.clearfixed:after{
-    display: table;
-    content: ' ';
-    clear:both;
-    height:0;
-}
-.clearfixed{
-    *zoom: 1;
-}

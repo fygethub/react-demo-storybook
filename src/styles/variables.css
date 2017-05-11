@@ -59,6 +59,17 @@
 
 @import "./font/font.css";
 
+
+.clearfixed:after{
+    display: table;
+    content: ' ';
+    clear:both;
+    height:0;
+}
+.clearfixed{
+    *zoom: 1;
+}
+
 .font-red{
     color: var(--brand-danger);
 }
