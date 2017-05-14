@@ -49,3 +49,57 @@
     width:100%;
     display: flex;
 }
+
+.recommend{
+    width:100%;
+}
+.recommend .h{
+    padding:.5rem;
+    border-bottom:1px solid var(--gray-lighter);
+}
+
+.h h3{
+    font-size: .8rem;
+    color:var(--gray-light);
+    font-weight:400;
+}
+.cards{
+    padding:.5rem;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.cards li{
+    padding: .5rem .5rem;
+}
+
+.searchHistory{
+    margin-top:2rem;
+}
+
+.searchHistoryHead{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 .5rem .5rem;
+    border-bottom: 1px solid var(--gray-lighter);
+}
+
+.leftHead, .rightHead{
+    font-size: .8rem;
+    color:var(--gray-light);
+    cursor:pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
