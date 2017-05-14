@@ -13,14 +13,18 @@ class AutoCompleteClass extends Component {
     constructor(props){
         super(props);
         this.state = {
-            searchText:''
+            searchText: ''
         }
         this.inputTimer = 0;
     }
 
+    componentWillUnMount(){
+        clearTimeout(this.inputTimer);
+    }
+
     handleSearchAutoComplete = () => {
         const { dispatch } = this.props;
-        dispatch(getBookList(this.state.searchText));
+        dispatch(getBookList(this.props.searchText || this.state.searchText));
     }
 
     /*输入框延处理*/
@@ -46,6 +50,7 @@ class AutoCompleteClass extends Component {
             searchText: ''
         })
         dispatch(receiveAutoComplete(''))
+        dispatch(getBookList(''));
     }
     render(){
         const { dataSource } = this.props;
@@ -54,18 +59,20 @@ class AutoCompleteClass extends Component {
                 <div className="autoCompleteSearchInput">
                     <AutoComplete
                         hintText="作者或者书名"
-                        searchText={this.state.searchText}
+                        searchText={this.state.searchText || this.props.searchText}
                         dataSource={dataSource}
                         onUpdateInput={this.handleUpdateInput}
                         style={{width:'80%'}}
-                        textFieldStyle={{width:'100%'}}
+                        textFieldStyle={{width:'114%'}}
                         openOnFocus
+                        menuCloseDelay={500}
                     />
                     <IconButton
                         onTouchTap={this.handleClearInput}
                     >
                         <FontIcon
                             className="iconfont icon-shanchu"
+                            color="var(--default-color)"
                         />
                     </IconButton>
                 </div>
