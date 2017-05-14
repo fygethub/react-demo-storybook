@@ -8,3 +8,20 @@ export const urlChange = (url) => {
     }
 
 }
+
+
+export const calcUpdateTime = (time) => {
+    let oldDate = time.substring(0,time.indexOf('Z')).replace('T',' ');
+    let times = new Date().getTime() - new Date(oldDate).getTime();
+    let hours = times / 1000 /3600;
+    if(hours <= 24)
+        return ~~hours + '小时前';
+    let day = hours / 24;
+    if(hours <= 30)
+        return ~~day+ '天前';
+    let month = day / 30;
+    if(month <= 12)
+        return ~~month +'个月前';
+
+    return ~~month / 12 + '年前';
+}
