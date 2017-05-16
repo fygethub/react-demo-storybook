@@ -25,3 +25,7 @@ export const calcUpdateTime = (time) => {
 
     return ~~month / 12 + '年前';
 }
+
+export const isInArr = (arr,arr1) =>{
+    return arr.some(item => arr1.some(item1 => item1 === item));
+}
