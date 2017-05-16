@@ -56,16 +56,18 @@
 article header{
     border-bottom: 1px solid var(--gray-lighter);
 }
-article p{
+article pre{
     padding: 1rem;
     text-indent: 2rem;
     display: -webkit-box;
-    -webkit-line-clamp: 13;
+    /*-webkit-line-clamp: 13;*/
     overflow:hidden;
     -webkit-text-overflow: ellipsis;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
     width: 100%;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 .bookIntroContent{

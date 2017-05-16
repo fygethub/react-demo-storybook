@@ -19,6 +19,8 @@
     --brand-danger:              #ff3800;
     --brand-white:               #fff;
 
+    --blue-lighter:              #30d3e8;
+
     /*Body*/
     --body-bg:                   #fff;
     --body-color:                color(var(--body-bg) contrast(50%));
