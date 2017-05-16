@@ -8,7 +8,8 @@ var ManifestPlugin = require('webpack-manifest-plugin');
 var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var paths = require('./paths');
 var getClientEnvironment = require('./env');
-
+var path = require('path');
+var ROOT_PATH = process.cwd();
 
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -82,7 +83,11 @@ module.exports = {
     alias: {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
-      'react-native': 'react-native-web'
+      'react-native': 'react-native-web',
+        'style': path.join(ROOT_PATH,'src/styles'),
+        'tools': path.join(ROOT_PATH,'src/tools'),
+        'commont': path.join(ROOT_PATH,'src/components/commont'),
+        'reduxs': path.join(ROOT_PATH,'src/redux'),
     }
   },
   
