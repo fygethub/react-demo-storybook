@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 import AutoComplete from 'material-ui/AutoComplete';
-import {receiveAutoComplete, getBookList } from 'reduxs/action'
+import {receiveAutoComplete, getBookList,isShowLoading } from 'reduxs/action'
 import PureRender from 'tools/decorators'
 
 
@@ -55,7 +55,7 @@ class AutoCompleteClass extends Component {
 
 
     render(){
-        const { dataSource } = this.props;
+        const { dataSource, dispatch } = this.props;
         return (
             <div className="autoComplete">
                 <div className="autoCompleteSearchInput">
@@ -68,6 +68,8 @@ class AutoCompleteClass extends Component {
                         textFieldStyle={{width:'114%'}}
                         openOnFocus
                         menuCloseDelay={500}
+                        onFocus={()=> {dispatch(isShowLoading(true))}}
+                        onBlur={()=> {setTimeout(()=>dispatch(isShowLoading(false)),300)}}
                     />
                     <IconButton
                         onTouchTap={this.handleClearInput}

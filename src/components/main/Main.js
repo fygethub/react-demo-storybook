@@ -28,7 +28,7 @@ export default class Main extends Component {
                     iconElementRight={<VertMenu />}
                 />
                 <div className="mainContent">
-                    <div className="lunbo"><img src="http://image.cmfu.com/books/3330580/3330580.jpg" alt="" /></div>
+                    <div className="lunbo" style={{background:'url(http://pic.58pic.com/58pic/13/85/85/73T58PIC9aj_1024.jpg)'}}></div>
                     <nav className="nav">
                         <ul>
                             <li><i className="dot" /> <span className="type">玄幻</span></li>

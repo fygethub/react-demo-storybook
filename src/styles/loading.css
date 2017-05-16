@@ -8,7 +8,7 @@
     background-color: rgba(9,9,9,.2);
     text-align: center;
     font-size: 10px;
-    z-index: 99999;
+    z-index: 99;
 }
 
 .spinner {

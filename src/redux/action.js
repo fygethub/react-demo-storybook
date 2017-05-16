@@ -49,7 +49,6 @@ export const addBookLongIntro = (bookIntro = {}) => ({
 });
 
 
-
 export const receiveBookLongIntro = (bookId) => dispatch => {
     dispatch(isShowLoading(true));
     fetch(`/book/${bookId}`).then(res => res.json())

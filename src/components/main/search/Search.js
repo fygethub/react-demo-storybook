@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // eslint-disable-next-line
 import { Link } from 'react-router-dom';
-import AppBar from 'material-ui/AppBar';
 import 'styles/search.css';
-import ReturnButton from 'commont/ReturnButton';
-import AutoCompleteClassWrap from './AutoCompleteClassWrap';
-import RecommendAndHistory from './RecommendAndHistory';
+import AppBar from 'material-ui/AppBar';
 import BookListItem from './BookListItem';
+import PureRender from 'tools/decorators';
+import ReturnButton from 'commont/ReturnButton';
+import RecommendAndHistory from './RecommendAndHistory';
+import AutoCompleteClassWrap from './AutoCompleteClassWrap';
 import { removeHistory, getBookList,autoComplete,receiveBookLongIntro} from 'reduxs/action';
+
+
+@PureRender
 class Search extends Component {
     render(){
        let len = this.props.bookList &&

@@ -32,7 +32,6 @@ export const isLoading = (state = false,action) => {
 
 export const historyList = (state = [], action = '') => {
     var historyListArr = storejs.get("historyListArr") || [];
-    console.log(historyListArr);
     switch (action.type){
         case ADD_SEARCH_HISTORY:
             //添加搜索记录缓存
