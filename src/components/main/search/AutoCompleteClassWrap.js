@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 import AutoComplete from 'material-ui/AutoComplete';
-import {receiveAutoComplete, getBookList } from '../redux/action'
-import PureRender from '../tools/decorators'
+import {receiveAutoComplete, getBookList } from 'reduxs/action'
+import PureRender from 'tools/decorators'
 
 
 @PureRender
@@ -52,6 +52,8 @@ class AutoCompleteClass extends Component {
         dispatch(receiveAutoComplete(''))
         dispatch(getBookList(''));
     }
+
+
     render(){
         const { dataSource } = this.props;
         return (

@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AppBar from 'material-ui/AppBar';
-import ReturnButton from './commont/ReturnButton';
-import Share from './commont/Share';
+import ReturnButton from 'commont/ReturnButton';
+import Share from 'commont/Share';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import '../styles/bookIntro.css'
-import PureRender from '../tools/decorators';
-import { calcUpdateTime,urlChange }from '../tools'
+import Loading from 'commont/Loading';
+import 'styles/bookIntro.css'
+import PureRender from 'tools/decorators';
+import { calcUpdateTime,urlChange }from 'tools'
 
 @PureRender
 class BookIntro extends Component {
     render(){
         let bookLongIntro = this.props.bookLongIntro;
+        if(!bookLongIntro){
+            return (
+                <Loading />
+            )
+        }
         const {
             title,
             author,
@@ -83,9 +89,9 @@ class BookIntro extends Component {
                         <header>
                             {tags_}
                         </header>
-                        <p>
+                        <pre>
                             {longIntro}
-                        </p>
+                        </pre>
                     </article>
                 </div>
             </div>

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import FontIcon from 'material-ui/FontIcon';
-import '../../styles/fonts.css';
+import 'styles/fonts.css';
 
 
 export const IconSearch = () => (
@@ -8,5 +8,5 @@ export const IconSearch = () => (
 )
 
 export const IconHome = () => (
-    <FontIcon className="iconfont icon-fangzi"/>
+    <FontIcon className="iconfont icon-fangzi" />
 )

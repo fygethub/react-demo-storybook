@@ -1,9 +1,9 @@
-import Main from '../components/Main';
-import Search from '../components/Search';
-import About from '../components/About';
-import BookIntro from '../components/BookIntro';
-import Read from '../components/Read';
-import ChangeOrigin from '../components/ChangeOrigin';
+import Main from '../components/main/Main';
+import Search from '../components/main/search/Search';
+import About from '../components/main/about/About';
+import BookIntro from '../components/main/bookIntro/BookIntro';
+import Read from '../components/main/read/Read';
+import ChangeOrigin from '../components/main/changeOrigin/ChangeOrigin';
 const routes = [
     {
         path: '/search',

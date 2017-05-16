@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import Paper from 'material-ui/Paper';
-import { IconHome,IconSearch } from './FontIcons/index'
+import { IconHome,IconSearch } from '../FontIcons/index'
 
 
 class Bottom extends Component {
@@ -16,6 +16,7 @@ class Bottom extends Component {
     select = (index) => this.setState({selectIndex: index});
 
     render() {
+        /* eslint-disable */
         return (
             <Paper zDepth={1} style={{}}>
                 <BottomNavigation selectedIndex={this.state.selectIndex}>

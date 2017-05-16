@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Card } from 'material-ui/Card';
-import '../styles/search.css';
+import 'styles/search.css';
 
 /*搜索结果列表*/
 class BookListItem extends Component {
@@ -13,13 +12,16 @@ class BookListItem extends Component {
     handleClick(e) {
         e.stopPropagation();
         this.props.item.onFetchBookIntro( this.props.item.bookId);
+        setTimeout(() => {
+            this.props.history.push('bookIntro');
+        },500);
     }
 
     render() {
         const { item } = this.props;
         return (
             <li className="bookListItem">
-                <Link to="bookIntro"
+                <a to="/bookIntro"
                       onClick={this.handleClick}
                 >
                     <Card
@@ -39,7 +41,7 @@ class BookListItem extends Component {
                         </div>
                         <p className="shortIntro">{item.shortIntro}</p>
                     </Card>
-                </Link>
+                </a>
             </li>
         )
     }

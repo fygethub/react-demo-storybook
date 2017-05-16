@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
 import Chip from 'material-ui/Chip';
-import '../styles/search.css';
+import 'styles/search.css';
 
 
 /*推荐列表*/

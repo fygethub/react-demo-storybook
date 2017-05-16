@@ -6,12 +6,16 @@ import darkBaseTheme from "material-ui/styles/baseThemes/lightBaseTheme";
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import './styles/reset.css';
-//import { receiveAutoComplete, getBookList} from './redux/action';
+// eslint-disable-next-line
+import { addSearchHistory, removeHistory, receiveBookLongIntro} from './redux/action';
 import Loading from './components/commont/Loading';
 import store from './redux/store';
 
 /*引用tap事件适配移动端*/
 injectTapEventPlugin();
+
+//store.dispatch(receiveBookLongIntro('57206c3539a913ad65d35c7b'));
+store.dispatch(addSearchHistory());
 
 class App extends Component {
 

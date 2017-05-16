@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FlatButton from 'material-ui/FlatButton';
-import '../../styles/share.css';
+import 'styles/share.css';
 
 
 class Share extends Component {

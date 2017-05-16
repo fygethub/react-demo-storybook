@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 // eslint-disable-next-line
 import { Link } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
-import '../styles/search.css';
-import ReturnButton from './commont/ReturnButton';
+import 'styles/search.css';
+import ReturnButton from 'commont/ReturnButton';
 import AutoCompleteClassWrap from './AutoCompleteClassWrap';
 import RecommendAndHistory from './RecommendAndHistory';
 import BookListItem from './BookListItem';
-import { removeHistory, getBookList,autoComplete,receiveBookLongIntro} from '../redux/action';
+import { removeHistory, getBookList,autoComplete,receiveBookLongIntro} from 'reduxs/action';
 class Search extends Component {
     render(){
        let len = this.props.bookList &&
@@ -40,7 +40,7 @@ class SearchBookList extends Component{
                 {/*<BookListItem item={{ imgUrl:'http://image.cmfu.com/books/3330580/3330580.jpg', hTitle:"Hello World", subTitle: "第二章"}} />
                  <BookListItem item={{ imgUrl:'http://image.cmfu.com/books/3330580/3330580.jpg', hTitle:"Hello World", subTitle: "第二章"}} />*/}
                 {bookList.map((book,i) =>
-                    <BookListItem key={i} item={{
+                    <BookListItem key={i} {...this.props} item={{
                         bookId:book._id,
                         imgUrl:book.cover,
                         hTitle:book.title,

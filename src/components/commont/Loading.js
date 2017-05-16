@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import '../../styles/loading.css';
+import 'styles/loading.css';
 
 const Loading = ({ isLoading }) => {
     let show = isLoading ? (

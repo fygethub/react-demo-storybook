@@ -23,7 +23,7 @@ export const calcUpdateTime = (time) => {
     if(month <= 12)
         return ~~month +'个月前';
 
-    return ~~month / 12 + '年前';
+    return ~~(month / 12 )+ '年前';
 }
 
 export const isInArr = (arr,arr1) =>{
