@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+# react 动手学习最好的例子 
 
 > 看见[ShanaMaid]()写了一个react读书app， 自己借用API练习一下，记录练习过程。
 ## 创建仓库
@@ -155,7 +155,7 @@ export default Routers;
 * 书籍详情页
 * 查询列表页
 
-## 页面写好了以后肯定就是写功能了，功能我们不上一次性去写完而是用到什么添加什么
+## 页面写好了以后肯定就是写功能了，功能我们不一次性去写完而是用到什么添加什么
  目前书籍搜索页面布局好了以后开始添加功能,不知不觉自己的文件就变得多了。
  
  这里普及一下生成图形目录的工具 用的是tree 工具
@@ -263,7 +263,7 @@ export const logger = (store) => next => action => {
       console.groupEnd(action.type);
       return result;
 }
-
+```
 
 >有了上面的middleware 就可以编写异步action了同样在 src/redux/action.js中添加
 ```typescript jsx
@@ -292,7 +292,7 @@ export const getBookList = (name) => dispatch => {
 
 ```
 
-> action编写完毕 接下来就应该编写reducer ，reducer意思是铜鼓action计算出下次的state由于我们会用到<font color=deepPink>conbinereducer</font>所以
+> action编写完毕 接下来就应该编写reducer ，reducer意思是通过action计算出下次的state由于我们会用到<font color=deepPink>conbinereducer</font>所以
 可以向下面的方式编写
 src/redux/reducer.js
 ```typescript jsx
@@ -330,8 +330,7 @@ export const isLoading = (state = false,action) => {
 
 ```
 
-##生成store
-底层步骤写完后下面就开始创建出我们需要的store了,创建store需要<font color=deepPink>redux 里面的方法</font>
+>生成store底层步骤写完后下面就开始创建出我们需要的store了,创建store需要<font color=deepPink>redux 里面的方法</font>
 ```typescript jsx
 
 //src/redux/store.js
@@ -346,7 +345,7 @@ let store = createStore(
 export default store;
 
 ```
-##好了该有的方法我们都创建完毕在App文件中来测试一下❤先 ， 跟着我默念一遍咒语
+>好了该有的方法我们都创建完毕在App文件中来测试一下❤先 ， 跟着我默念一遍咒语
 > 神兽保佑🙏代码一次过
 
 ```typescript jsx
@@ -407,7 +406,7 @@ export default App;
 
 ```
 
-## <font color=deepPink> 代码跑起来 npm start</font>
+### <font color=deepPink> 代码跑起来 npm start</font>
 看到我们的控制台发现有个小警告说闭合标签前面需要有一个空格 果断跑去加一个 ![pic](githubImgs/测试redux逻辑.png);
 
 在看一次我们的请求都发出去了，reducer也接收到action后为我们处理了。
@@ -480,3 +479,80 @@ PureRender.prototype.shouldComponentUpdate = function(nextProps,nextState,prevPr
 export default PureRender;
 
 ```
+
+## 搜索页面，添加历史搜索页和推荐列表需要做如下操作：
+* 历史搜索页面布局
+* 新增历史搜索的action 和 reducer
+
+![历史搜索页和推荐列表](githubImgs/历史搜索.png)
+如果state中没有搜索列表就显示推荐列表和历史记录，历史记录还没添加本地缓存功能。
+添加历史记录功能后search组件中布局内容多了起来，因此把历史和列表显示拆分成两个不通的组件，这也符合渐进式推进自己的项目。
+
+
+
+-------------------------
+##接下来添加点击搜索列表跳转书籍详情页
+* 准备用Link 标签跳转到详情页，点击的同时发送一个请求书籍详情的action 然后显示在详情页。布局如下并添加action与reducer函数
+![书籍详情](githubImgs/bookintro.jpg)
+
+```typescript jsx
+// src/redux/action.js 新增
+export const ADD_BOOK_LONG_INTRO = 'ADD_BOOK_LONG_INTRO';
+
+export const addBookLongIntro = (bookIntro = {}) => ({
+    type: ADD_BOOK_LONG_INTRO,
+    bookIntro
+})
+
+export const receiveBookLongIntro = (bookId) => dispatch => {
+    dispatch(isShowLoading(true));
+    fetch(`/book/${bookId}`).then(res => res.json())
+        .then(data => {
+            dispatch(addBookLongIntro(data));
+            dispatch(isShowLoading(false));
+        })
+        .catch(err => {
+            console.error(Error(err));
+        })
+}
+
+```
+
+* 在reducer中添加处理函数
+```typescript jsx
+//src/redux/reducer.js
+
+export const bookLongIntro = (state = {}, action) =>{
+    switch (action.type){
+        case ADD_BOOK_LONG_INTRO:
+            let {bookIntro } = action;
+            return { bookIntro }
+        default:
+            return state;
+    }
+}
+
+//App.js 测试一下
+store.dispatch(receiveBookLongIntro('57206c3539a913ad65d35c7b'));
+//然后看打印日志
+```
+### 测试详细介绍
+![测试](githubImgs/longIntro.jpg)
+* 接下来要做的就是往自己写的详情页面塞数据，相信大家都能做到。
+
+###bug 遇到一个点击穿透的问题，当点击自动补全的列表时，实际上会点到下面介绍列表。
+![bug](githubImgs/touchBug.gif)
+
+* 猜测是因为选择补全列表后移动设备有300ms延迟，在300ms内补全列表隐藏了所以就点击到查询列表项。
+试了好几种解决办法 发现不是什么300ms的问题。因为通过router 的 history.push() 方法延迟跳转后还是会跳转，感觉就是直接点击到上面的。
+
+##给历史记录添加缓存
+> 通过storejs （给localStorage 添加几个操作方法，少了一次字符串和json转换）添加缓存，并在App.js中启动时候调用一次读取上次的缓存。
+
+## 修改了一下文件的存放 
+> 文件安装模块简历文件夹存放文件
+
+
+
+
+
