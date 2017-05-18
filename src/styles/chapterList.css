@@ -10,9 +10,6 @@
     text-align:center;padding:.5rem;color:var(--gray-light);
 }
 
-.chapterList{
-    padding:.3rem;
-}
 .chapterList:hover{
     background:var(--gray-lighter);
 }
@@ -20,14 +17,19 @@
 .chapterList{
     display: flex;
     justify-content: space-between;
-    padding-right: 1.5rem;
+    padding: .3rem 1.5rem .3rem .3rem;
     border-bottom:1px solid var(--gray-lighter);
+    align-items: center;
 }
 
 .chapterList span{
     padding:.3rem;
 }
 .chapterList a{
+    width:80%;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
     color:var(--gray-dark);
 }
 .chapterList a:link{
@@ -46,7 +48,9 @@
     color:var(--brand-success);
 }
 
-
+.limessage{
+    width:3rem;
+}
 
 
 

@@ -1,19 +1,14 @@
 @font-face {
     font-family: 'iconfont';  /* project id 171258 */
-    src: url('//at.alicdn.com/t/font_9410jvnk3boi529.eot');
-    src: url('//at.alicdn.com/t/font_9410jvnk3boi529.eot?#iefix') format('embedded-opentype'),
-    url('//at.alicdn.com/t/font_9410jvnk3boi529.woff') format('woff'),
-    url('//at.alicdn.com/t/font_9410jvnk3boi529.ttf') format('truetype'),
-    url('//at.alicdn.com/t/font_9410jvnk3boi529.svg#iconfont') format('svg');
+    src: url('//at.alicdn.com/t/font_3qxnlu179mg0t3xr.eot');
+    src: url('//at.alicdn.com/t/font_3qxnlu179mg0t3xr.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_3qxnlu179mg0t3xr.woff') format('woff'),
+    url('//at.alicdn.com/t/font_3qxnlu179mg0t3xr.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_3qxnlu179mg0t3xr.svg#iconfont') format('svg');
 }
 
-@import url("//at.alicdn.com/t/font_9410jvnk3boi529.css");
+@import url("//at.alicdn.com/t/font_3qxnlu179mg0t3xr.css");
 
-.iconfont.icon-sousu{
+.iconfont{
     font-size:1.5rem !important;
-    color:white !important;
-}
-
-.iconfont.icon-shanchu{
-    font-size: 1rem !important;
 }
