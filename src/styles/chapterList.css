@@ -1,0 +1,66 @@
+@import "variables.css";
+
+.chapterContainer{
+    width: 100vmin;
+    height: 100vmax;
+    overflow: scroll;
+}
+
+.chapterContainer h2{
+    text-align:center;padding:.5rem;color:var(--gray-light);
+}
+
+.chapterList{
+    padding:.3rem;
+}
+.chapterList:hover{
+    background:var(--gray-lighter);
+}
+
+.chapterList{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 1.5rem;
+    border-bottom:1px solid var(--gray-lighter);
+}
+
+.chapterList span{
+    padding:.3rem;
+}
+.chapterList a{
+    color:var(--gray-dark);
+}
+.chapterList a:link{
+    color:var(--gray-light);
+}
+
+.chapterList a:visited{
+    color:var(--brand-info);
+}
+
+.chapterList a:hover{
+    color:var(--brand-primary);
+}
+
+.chapterList a:active{
+    color:var(--brand-success);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
