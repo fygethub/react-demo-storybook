@@ -28,7 +28,7 @@ export default class Main extends Component {
                     iconElementRight={<VertMenu />}
                 />
                 <div className="mainContent">
-                    <div className="lunbo" style={{background:'url(http://pic.58pic.com/58pic/13/85/85/73T58PIC9aj_1024.jpg)'}}></div>
+                    <div className="lunbo" style={{background:'url(http://pic.58pic.com/58pic/13/85/85/73T58PIC9aj_1024.jpg)'}} />
                     <nav className="nav">
                         <ul>
                             <li><i className="dot" /> <span className="type">玄幻</span></li>
@@ -78,7 +78,7 @@ export default class Main extends Component {
                     </div>
                 </div>
                 <div className="footer">
-                    <Bottom />
+                    <Bottom history={this.props.history} />
                 </div>
             </div>
         )

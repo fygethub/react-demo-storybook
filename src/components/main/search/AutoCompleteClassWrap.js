@@ -1,8 +1,8 @@
 import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import IconButton from 'material-ui/IconButton';
-import FontIcon from 'material-ui/FontIcon';
 import AutoComplete from 'material-ui/AutoComplete';
+import { IconCancel, IconSearch} from '../../FontIcons'
 import {receiveAutoComplete, getBookList,isShowLoading } from 'reduxs/action'
 import PureRender from 'tools/decorators'
 
@@ -53,9 +53,15 @@ class AutoCompleteClass extends Component {
         dispatch(getBookList(''));
     }
 
+    handleFcous = () => {
+        this.props.dispatch(isShowLoading(true))
+    }
 
+    handleBlur = () => {
+        setTimeout(()=>this.props.dispatch(isShowLoading(false)),300)
+    }
     render(){
-        const { dataSource, dispatch } = this.props;
+        const { dataSource } = this.props;
         return (
             <div className="autoComplete">
                 <div className="autoCompleteSearchInput">
@@ -68,24 +74,23 @@ class AutoCompleteClass extends Component {
                         textFieldStyle={{width:'114%'}}
                         openOnFocus
                         menuCloseDelay={500}
-                        onFocus={()=> {dispatch(isShowLoading(true))}}
-                        onBlur={()=> {setTimeout(()=>dispatch(isShowLoading(false)),300)}}
+                        onFocus={this.handleFcous}
+                        onBlur={this.handleBlur}
                     />
                     <IconButton
                         onTouchTap={this.handleClearInput}
                     >
-                        <FontIcon
+                        {/*<FontIcon
                             className="iconfont icon-shanchu"
                             color="var(--default-color)"
-                        />
+                        />*/}
+                        <IconCancel />
                     </IconButton>
                 </div>
                 <IconButton
                     onTouchTap={this.handleSearchAutoComplete}
                 >
-                    <FontIcon
-                        className="iconfont icon-sousu"
-                    />
+                    <IconSearch />
                 </IconButton>
             </div>
         )

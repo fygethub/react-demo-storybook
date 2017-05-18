@@ -25,7 +25,7 @@ class RecommendAndHistory extends Component {
                                 <Chip
                                     onTouchTap={()=>{this.props.onSearchBook(name)}}
                                     labelStyle={i<=1 ? {color:'red'}: null}
-                                    style={i<=1? redStyle: style}
+                                    style={i<=1? redStyle: null}
                                 >{name}</Chip>
                             </li>
                         ))

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import Paper from 'material-ui/Paper';
-import { IconHome,IconSearch } from '../FontIcons/index'
+import { IconHome,IconSearch, IconRead } from '../FontIcons/index'
 
 
 class Bottom extends Component {
@@ -13,7 +13,15 @@ class Bottom extends Component {
         }
     }
 
-    select = (index) => this.setState({selectIndex: index});
+    select = (index) => {
+        this.setState({selectIndex: index});
+       setTimeout(function () {
+           index === 1 && this.props.history.push(`/search`);
+       }.bind(this),300)
+        setTimeout(function () {
+            index === 2 && this.props.history.push(`/read/1${index}`);
+        }.bind(this),300)
+    }
 
     render() {
         /* eslint-disable */
@@ -27,8 +35,13 @@ class Bottom extends Component {
                     />
                     <BottomNavigationItem
                         label="search"
-                        icon={<Link to="/search"><IconSearch /></Link>}
+                        icon={<IconSearch />}
                         onTouchTap={()=> this.select(1)}
+                    />
+                    <BottomNavigationItem
+                        label="read"
+                        icon={<IconRead />}
+                        onTouchTap={()=> this.select(2)}
                     />
                 </BottomNavigation>
             </Paper>
