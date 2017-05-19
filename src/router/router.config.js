@@ -16,7 +16,7 @@ const routes = [
         exact: true,
     },
     {
-        path: '/bookIntro',
+        path: '/bookIntro/:id',
         component: BookIntro,
         exact: true,
     },

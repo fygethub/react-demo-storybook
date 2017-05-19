@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import ReturnButton from 'commont/ReturnButton';
 import Share from 'commont/Share';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import Loading from 'commont/Loading';
-import 'styles/bookIntro.css'
 import PureRender from 'tools/decorators';
-import { calcUpdateTime,urlChange }from 'tools'
+import { calcUpdateTime,urlChange }from 'tools';
+import ReactCssTransitionGroup from 'react-addons-css-transition-group';
+import 'styles/animate.css';
+import 'styles/bookIntro.css'
+
+
 
 @PureRender
 class BookIntro extends Component {
@@ -46,6 +51,13 @@ class BookIntro extends Component {
                     iconElementRight={<Share />}
                     iconStyleRight={{marginTop:'1rem'}}
                 />
+                <ReactCssTransitionGroup
+                    transitionName="fadeIn"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={300}
+                    transitionAppearTimeout={500}
+                    transitionAppear
+                >
                 <div className="bookIntroContent">
                     <nav className="bookNav">
                         <aside className="imgDiv"><img src={urlChange(cover)} alt="" /></aside>
@@ -65,10 +77,12 @@ class BookIntro extends Component {
                             ><i className="iconfont icon-guanbi" />不追了</RaisedButton>
                         </div>
                         <div className="button-container">
-                            <RaisedButton
-                                primary
-                                fullWidth
-                            ><i className="iconfont icon-llalbumdiggbtn" />开始阅读</RaisedButton>
+
+                                <RaisedButton
+                                    primary
+                                    fullWidth
+                                ><Link to={'read/'+_id}><i className="iconfont icon-llalbumdiggbtn" />开始阅读 </Link></RaisedButton>
+
                         </div>
                     </div>
                     <section className="detailIntro">
@@ -94,6 +108,7 @@ class BookIntro extends Component {
                         </pre>
                     </article>
                 </div>
+                </ReactCssTransitionGroup>
             </div>
         )
     }

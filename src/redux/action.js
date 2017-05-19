@@ -8,6 +8,8 @@ export const AUTO_COMPLETE = 'AUTO_COMPLETE';
 export const ADD_SEARCH_HISTORY = 'ADD_SEARCH_HISTORY';
 export const REMOVE_SEARCH_HISTORY = 'REMOVE_SEARCH_HISTORY';
 export const ADD_BOOK_LONG_INTRO = 'ADD_BOOK_LONG_INTRO';
+export const ADD_CHAPTERS_LIST = 'ADD_CHAPTERS_LIST';
+
 
 
 const receiveBookList = (data, name) => ({
@@ -34,21 +36,23 @@ export const addSearchHistory = (bookName = '') => {
     }
 };
 
-export const removeHistory = (bookName = '') => {
-
-    return {
-        type: REMOVE_SEARCH_HISTORY,
-        bookName
-    }
-
-};
+export const removeHistory = (bookName = '') => ({
+    type: REMOVE_SEARCH_HISTORY,
+    bookName,
+});
 
 export const addBookLongIntro = (bookIntro = {}) => ({
     type: ADD_BOOK_LONG_INTRO,
     bookIntro
 });
 
+export const addChapters = (chapters = {}) => ({
+    type: ADD_CHAPTERS_LIST,
+    chapters
+})
 
+
+//书籍详细介绍
 export const receiveBookLongIntro = (bookId) => dispatch => {
     dispatch(isShowLoading(true));
     fetch(`/book/${bookId}`).then(res => res.json())
@@ -57,10 +61,13 @@ export const receiveBookLongIntro = (bookId) => dispatch => {
             dispatch(isShowLoading(false));
         })
         .catch(err => {
+            dispatch(isShowLoading(false));
             console.error(Error(err));
         })
     };
 
+
+//自动补全列表
 export const receiveAutoComplete = name => dispatch =>{
     if(name === '') {
         return dispatch(autoComplete());
@@ -72,7 +79,7 @@ export const receiveAutoComplete = name => dispatch =>{
     };
 
 
-
+//获取书籍列表
 export const getBookList = (name) => dispatch => {
     if(name === '') {
        return dispatch(receiveBookList([],''));
@@ -90,6 +97,38 @@ export const getBookList = (name) => dispatch => {
             return action;
         })
         .catch(error => {
+            dispatch(isShowLoading(false));
             new Error(error);
         })
     };
+
+// 章节列表，需要先获取书源信息
+export const getChpters = id => dispatch => {
+    dispatch(isShowLoading(true));
+    let chapters = {};
+    fetch(`/api/toc?view=summary&book=${id}`)
+        .then(res => res.json())
+        .then(data => {
+           let sourceId =data[0]._id;
+           for(let item of data){
+               // 为什么要用他的 我也不知道 可能是比较好拿
+               if(item.source === 'shuhaha'){
+                   sourceId = item._id;
+               }
+           }
+            chapters.sourceId = sourceId;
+            return fetch(`/api/toc/${sourceId}?view=chapters`)
+        })
+        .then(res => res.json())
+        .then(data => {
+            chapters.chapters = data;
+            let action = dispatch(addChapters(chapters));
+            dispatch(isShowLoading(false));
+            return action;
+        })
+        .catch(error => {
+            dispatch(isShowLoading(false));
+            new Error(error);
+        })
+
+}

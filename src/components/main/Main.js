@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
+import Bottom from './Bottom';
 import Divider from 'material-ui/Divider';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import ArrowDropRight from 'material-ui/svg-icons/navigation-arrow-drop-right';
-import Bottom from './Bottom';
+import ReactCssTransitionGrop from 'react-addons-css-transition-group';
 import 'styles/main.css';
-
+import 'styles/animate.css';
 
 export default class Main extends Component {
     constructor(props){
@@ -20,7 +21,14 @@ export default class Main extends Component {
 
     render(){
         return (
-            <div>
+            <ReactCssTransitionGrop
+                transitionName="fadeIn"
+                transitionEnterTimeout={500}
+                transitionLeaveTimeout={300}
+                transitionAppearTimeout={500}
+                transitionAppear
+                component="div"
+            >
                 <AppBar
                     title="看 看 看 看"
                     titleStyle={{textAlign:'center',fontSize:'1.5rem'}}
@@ -80,7 +88,7 @@ export default class Main extends Component {
                 <div className="footer">
                     <Bottom history={this.props.history} />
                 </div>
-            </div>
+            </ReactCssTransitionGrop>
         )
     }
 }

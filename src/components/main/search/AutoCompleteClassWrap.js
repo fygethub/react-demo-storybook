@@ -54,11 +54,11 @@ class AutoCompleteClass extends Component {
     }
 
     handleFcous = () => {
-        this.props.dispatch(isShowLoading(true))
+        this.props.isShowLoading && this.props.dispatch(isShowLoading(true));
     }
 
     handleBlur = () => {
-        setTimeout(()=>this.props.dispatch(isShowLoading(false)),300)
+        setTimeout(()=>this.props.dispatch(isShowLoading(false)),300);
     }
     render(){
         const { dataSource } = this.props;
@@ -100,7 +100,8 @@ class AutoCompleteClass extends Component {
 
 const autoCompleteMapStateToProps = (state) => ({
     dataSource: state.autoBookList.lists || [],
-    searchText: state.autoBookList.name || ''
+    searchText: state.autoBookList.name || '',
+    isShowLoading: state.bookList.books.length > 0,
 })
 
 const AutoCompleteClassWrap = connect(autoCompleteMapStateToProps)(AutoCompleteClass);

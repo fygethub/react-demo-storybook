@@ -10,7 +10,9 @@ import ReturnButton from 'commont/ReturnButton';
 import RecommendAndHistory from './RecommendAndHistory';
 import AutoCompleteClassWrap from './AutoCompleteClassWrap';
 import { removeHistory, getBookList,autoComplete,receiveBookLongIntro} from 'reduxs/action';
-
+import ReactCssTransitionGroup from 'react-addons-css-transition-group';
+import 'styles/chapterList.css';
+import 'styles/animate.css';
 
 @PureRender
 class Search extends Component {
@@ -25,10 +27,18 @@ class Search extends Component {
                     children={<AutoCompleteClassWrap />}
                     iconElementLeft={<ReturnButton history={this.props.history} />}
                 />
-                <div className="bookListContainer">
-                    {len > 0? <SearchBookList {...this.props} />
-                        : <RecommendAndHistory {...this.props} />}
-                </div>
+                <ReactCssTransitionGroup
+                    transitionName="fadeIn"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={300}
+                    transitionAppearTimeout={500}
+                    transitionAppear
+                >
+                    <div className="bookListContainer">
+                        {len > 0? <SearchBookList {...this.props} />
+                            : <RecommendAndHistory {...this.props} />}
+                    </div>
+                </ReactCssTransitionGroup>
             </div>
         )
     }

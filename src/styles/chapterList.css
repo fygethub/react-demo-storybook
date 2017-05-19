@@ -4,10 +4,15 @@
     width: 100vmin;
     height: 100vmax;
     overflow: scroll;
+
 }
 
 .chapterContainer h2{
     text-align:center;padding:.5rem;color:var(--gray-light);
+}
+
+.chapterUl{
+    padding:0 0 5rem 0;
 }
 
 .chapterList:hover{
@@ -17,7 +22,7 @@
 .chapterList{
     display: flex;
     justify-content: space-between;
-    padding: .3rem 1.5rem .3rem .3rem;
+    padding: .3rem 4.5rem .3rem .3rem;
     border-bottom:1px solid var(--gray-lighter);
     align-items: center;
 }

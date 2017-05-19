@@ -1,6 +1,14 @@
-import { IS_LOADING, GET_BOOK_LIST, AUTO_COMPLETE,ADD_SEARCH_HISTORY, REMOVE_SEARCH_HISTORY, ADD_BOOK_LONG_INTRO } from './action';
+import {
+    IS_LOADING, GET_BOOK_LIST,
+    AUTO_COMPLETE,ADD_SEARCH_HISTORY,
+    REMOVE_SEARCH_HISTORY,
+    ADD_BOOK_LONG_INTRO ,
+    ADD_CHAPTERS_LIST
+} from './action';
 import { isInArr } from '../tools';
 import storejs from 'storejs';
+
+//书籍列表
 export const bookList = (state = {books:[], name: ''},action={}) => {
     switch (action.type){
         case GET_BOOK_LIST:
@@ -11,6 +19,7 @@ export const bookList = (state = {books:[], name: ''},action={}) => {
     }
 }
 
+//自动补全列表
 export const autoBookList = (state = {lists : [],name : '' }, action) => {
    switch (action.type){
        case AUTO_COMPLETE:
@@ -21,6 +30,7 @@ export const autoBookList = (state = {lists : [],name : '' }, action) => {
 
 }
 
+//加载状态
 export const isLoading = (state = false,action) => {
     switch(action.type){
         case IS_LOADING:
@@ -30,6 +40,7 @@ export const isLoading = (state = false,action) => {
     }
 }
 
+//历史记录列表
 export const historyList = (state = [], action = '') => {
     var historyListArr = storejs.get("historyListArr") || [];
     switch (action.type){
@@ -72,8 +83,7 @@ export const historyList = (state = [], action = '') => {
     }
 }
 
-
-
+//书籍详情
 export const bookLongIntro = (state = {}, action) =>{
     switch (action.type){
         case ADD_BOOK_LONG_INTRO:
@@ -83,6 +93,21 @@ export const bookLongIntro = (state = {}, action) =>{
             return state;
     }
 }
+
+//书籍章节列表
+export const chaptersList = (state = {}, action) => {
+    switch (action.type){
+        case ADD_CHAPTERS_LIST:
+            return action.chapters;
+        default:
+            return state;
+    }
+}
+
+
+
+
+
 
 
 

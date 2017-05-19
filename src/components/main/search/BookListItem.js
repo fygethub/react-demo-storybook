@@ -12,16 +12,14 @@ class BookListItem extends Component {
     handleClick(e) {
         e.stopPropagation();
         this.props.item.onFetchBookIntro( this.props.item.bookId);
-        setTimeout(() => {
-            this.props.history.push('bookIntro');
-        },500);
+        this.props.history.push('bookIntro/'+ this.props.item.bookId);
     }
 
     render() {
         const { item } = this.props;
         return (
             <li className="bookListItem">
-                <a to="/bookIntro"
+                <a
                       onClick={this.handleClick}
                 >
                     <Card

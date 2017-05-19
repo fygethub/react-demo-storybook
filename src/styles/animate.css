@@ -57,3 +57,54 @@
     backface-visibility: visible !important;
     animation-name: flipOutY;
 }
+
+.fadeIn-enter{
+    opacity: 0.01;
+    transform: translateX(-100%);
+}
+
+.fadeIn-enter.fadeIn-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+
+.fadeIn-leave {
+    opacity: 1;
+}
+
+.fadeIn-leave.fadeIn-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+}
+
+.fadeIn-appear {
+    opacity: 0.01;
+}
+
+.fadeIn-appear.fadeIn-appear-active {
+    opacity: 1;
+    transition: opacity .5s ease-in;
+    /*-webkit-backface-visibility: visible !important;*/
+    /*backface-visibility: visible !important;*/
+    /*animation:flipInY .5s ease-in both ;*/
+    /*animation-name: flipInY;*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

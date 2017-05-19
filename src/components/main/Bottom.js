@@ -19,7 +19,7 @@ class Bottom extends Component {
            index === 1 && this.props.history.push(`/search`);
        }.bind(this),300)
         setTimeout(function () {
-            index === 2 && this.props.history.push(`/read/1${index}`);
+            index === 2 && this.props.history.push(`/read/577b672033724b2877a182a4`);
         }.bind(this),300)
     }
 

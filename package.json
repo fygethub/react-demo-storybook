@@ -51,6 +51,7 @@
     "material-ui": "^0.18.0",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
+    "react-addons-css-transition-group": "^15.5.2",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
     "react-router-dom": "^4.1.1",

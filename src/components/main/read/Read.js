@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import { getChpters } from 'reduxs/action';
 import { IconMessage } from '../../FontIcons'
 import AppBar from 'material-ui/AppBar';
 import Badge from 'material-ui/Badge';
 import ReturnButton from 'commont/ReturnButton';
+import ReactCssTransitionGroup from 'react-addons-css-transition-group';
 import 'styles/chapterList.css';
+import 'styles/animate.css';
+
+
+
+
 class Read extends Component {
 
     componentDidMount() {
@@ -16,11 +22,12 @@ class Read extends Component {
 
     componentWillReceiveProps(nextprops){
         //let chapters = this.props.chaptersList;
-        console.log(nextprops);
+        //console.log(nextprops);
     }
 
     render(){
-        let chapters = this.props.chaptersList;
+        let chapters = this.props.chaptersList.chapters ? this.props.chaptersList.chapters : [];
+
         if(chapters.chapters && chapters.chapters.length > 0){
 
             return (<div>
@@ -29,6 +36,13 @@ class Read extends Component {
                             titleStyle={{textAlign:'center',fontSize:'1.5rem',paddingRight:'1rem'}}
                             iconElementLeft={<ReturnButton history={this.props.history} />}
                         />
+                    <ReactCssTransitionGroup
+                        transitionName="fadeIn"
+                        transitionEnterTimeout={500}
+                        transitionLeaveTimeout={300}
+                        transitionAppearTimeout={500}
+                        transitionAppear
+                    >
                         <div className="chapterContainer">
                                 <ul className="chapterUl">
                                     {
@@ -50,8 +64,8 @@ class Read extends Component {
                                         )
                                     }
                                 </ul>
-                                <Link to="/">main</Link>
                             </div>
+                    </ReactCssTransitionGroup>
                         </div>
             );
         }else{
