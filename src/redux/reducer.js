@@ -62,13 +62,7 @@ export const historyList = (state = [], action = '') => {
             }
             historyListArr.push(action.bookName);
             storejs.set('historyListArr',historyListArr);
-            let arr = [];
-            if(state.length === 0){
-                return historyListArr;
-            }
-            arr = state.concat([]);
-            arr.concat(historyListArr);
-            return arr;
+            return historyListArr;
         case REMOVE_SEARCH_HISTORY:
             if(state.length >= 1 && action !== ''){
                 //移除缓存记录

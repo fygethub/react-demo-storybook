@@ -9,13 +9,19 @@ import PureRender from 'tools/decorators';
 import ReturnButton from 'commont/ReturnButton';
 import RecommendAndHistory from './RecommendAndHistory';
 import AutoCompleteClassWrap from './AutoCompleteClassWrap';
-import { removeHistory, getBookList,autoComplete,receiveBookLongIntro} from 'reduxs/action';
+import { removeHistory, getBookList,autoComplete,receiveBookLongIntro,addSearchHistory} from 'reduxs/action';
 import ReactCssTransitionGroup from 'react-addons-css-transition-group';
 import 'styles/chapterList.css';
 import 'styles/animate.css';
 
 @PureRender
 class Search extends Component {
+
+    componentDidMount() {
+        this.props.addSearchHistory('');
+    }
+
+
     render(){
        let len = this.props.bookList &&
            this.props.bookList.length ;
@@ -89,6 +95,10 @@ const mapDispatchToProps = (dispatch) => ({
     },
     onFetchBookIntro: (id) =>{
         dispatch(receiveBookLongIntro(id));
+    },
+    addSearchHistory : (val) => {
+        dispatch(getBookList(val));
+        dispatch(addSearchHistory(val))
     }
 })
 
