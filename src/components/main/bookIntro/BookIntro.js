@@ -9,6 +9,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Loading from 'commont/Loading';
 import PureRender from 'tools/decorators';
 import { calcUpdateTime,urlChange }from 'tools';
+import { receiveBookLongIntro} from 'reduxs/action';
 import ReactCssTransitionGroup from 'react-addons-css-transition-group';
 import 'styles/animate.css';
 import 'styles/bookIntro.css'
@@ -17,11 +18,26 @@ import 'styles/bookIntro.css'
 
 @PureRender
 class BookIntro extends Component {
+
+    componentDidMount() {
+        const { match } = this.props;
+        this.props.onFetchBookIntro(match.params.id);
+    }
+
     render(){
         let bookLongIntro = this.props.bookLongIntro;
         if(!bookLongIntro){
             return (
-                <Loading />
+                <div>
+                    <AppBar
+                        title="书籍详情"
+                        style={{textAlign:'center'}}
+                        iconElementLeft={<ReturnButton history={this.props.history} />}
+                        iconElementRight={<Share />}
+                        iconStyleRight={{marginTop:'1rem'}}
+                    />
+                    <Loading />
+                </div>
             )
         }
         const {
@@ -77,12 +93,11 @@ class BookIntro extends Component {
                             ><i className="iconfont icon-guanbi" />不追了</RaisedButton>
                         </div>
                         <div className="button-container">
-
-                                <RaisedButton
-                                    primary
-                                    fullWidth
-                                ><Link to={'read/'+_id}><i className="iconfont icon-llalbumdiggbtn" />开始阅读 </Link></RaisedButton>
-
+                            <RaisedButton
+                                primary
+                                fullWidth
+                            ><Link to={'/read/'+_id}><i className="iconfont icon-llalbumdiggbtn" />开始阅读 </Link>
+                            </RaisedButton>
                         </div>
                     </div>
                     <section className="detailIntro">
@@ -118,4 +133,9 @@ const mapStateToProps = (state) => ({
     bookLongIntro: state.bookLongIntro.bookIntro
 })
 
-export default connect(mapStateToProps)(BookIntro);
+const mapDispatchToProps = (dispatch) => ({
+    onFetchBookIntro: (id) =>{
+        dispatch(receiveBookLongIntro(id));
+    }
+})
+export default connect(mapStateToProps,mapDispatchToProps)(BookIntro);

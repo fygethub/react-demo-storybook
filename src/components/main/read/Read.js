@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PureRender from 'tools/decorators';
 //import { Link } from 'react-router-dom';
 import { getChpters } from 'reduxs/action';
 import { IconMessage } from '../../FontIcons'
@@ -11,8 +12,7 @@ import 'styles/chapterList.css';
 import 'styles/animate.css';
 
 
-
-
+@PureRender
 class Read extends Component {
 
     componentDidMount() {
@@ -40,7 +40,7 @@ class Read extends Component {
                         transitionName="fadeIn"
                         transitionEnterTimeout={500}
                         transitionLeaveTimeout={300}
-                        transitionAppearTimeout={500}
+                        transitionAppearTimeout={300}
                         transitionAppear
                     >
                         <div className="chapterContainer">

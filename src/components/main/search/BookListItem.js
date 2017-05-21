@@ -11,7 +11,7 @@ class BookListItem extends Component {
     /*这里换成箭头函数不知道为什么this指向不对*/
     handleClick(e) {
         e.stopPropagation();
-        this.props.item.onFetchBookIntro( this.props.item.bookId);
+        //this.props.item.onFetchBookIntro( this.props.item.bookId);
         this.props.history.push('bookIntro/'+ this.props.item.bookId);
     }
 
