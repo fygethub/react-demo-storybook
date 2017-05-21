@@ -1,0 +1,27 @@
+@import "variables.css";
+
+
+
+.readDetailContainer{
+    width:100vw;
+    height:100vh;
+    overflow: auto;
+}
+
+
+.readDetailContent p{
+    white-space: pre-line;
+    word-wrap: break-word;
+    text-indent: 2rem;
+    padding:1rem;
+}
+
+
+
+
+
+
+
+
+
+

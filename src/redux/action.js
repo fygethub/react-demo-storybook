@@ -9,7 +9,7 @@ export const ADD_SEARCH_HISTORY = 'ADD_SEARCH_HISTORY';
 export const REMOVE_SEARCH_HISTORY = 'REMOVE_SEARCH_HISTORY';
 export const ADD_BOOK_LONG_INTRO = 'ADD_BOOK_LONG_INTRO';
 export const ADD_CHAPTERS_LIST = 'ADD_CHAPTERS_LIST';
-
+export const ADD_READ_DETAIL = 'ADD_READ_DETAIL';
 
 
 const receiveBookList = (data, name) => ({
@@ -51,6 +51,11 @@ export const addChapters = (chapters = {}) => ({
     chapters
 })
 
+
+export const readDetail = (readObj = {}) => ({
+    type: ADD_READ_DETAIL,
+    readObj,
+})
 
 //书籍详细介绍
 export const receiveBookLongIntro = (bookId) => dispatch => {
@@ -132,3 +137,32 @@ export const getChpters = id => dispatch => {
         })
 
 }
+
+/*详细阅读*/
+export const getReadDetail = url => dispatch => {
+    if(url === '') return ;
+    dispatch(isShowLoading(true));
+    return fetch(`/chapter/${url}?k=2124b73d7e2e1945&t=1468223717`)
+        .then(res => res.json())
+        .then(data => {
+            let action = dispatch(readDetail(data));
+            dispatch(isShowLoading(false));
+            return action;
+        })
+        .catch(err=> {
+            dispatch(isShowLoading(false));
+            new Error(err)
+        });
+
+}
+
+
+
+
+
+
+
+
+
+
+

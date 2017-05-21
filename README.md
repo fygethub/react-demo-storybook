@@ -559,5 +559,97 @@ store.dispatch(receiveBookLongIntro('57206c3539a913ad65d35c7b'));
 
 
 
+## 添加章节列表 
+
+* 添加action
+* 添加reducer
+* 编写组件
+
+
+```typescript jsx
+
+//action
+// 章节列表，需要先获取书源信息
+export const getChpters = id => dispatch => {
+    dispatch(isShowLoading(true));
+    let chapters = {};
+    fetch(`/api/toc?view=summary&book=${id}`)
+        .then(res => res.json())
+        .then(data => {
+           let sourceId =data[0]._id;
+           for(let item of data){
+               // 为什么要用他的 我也不知道 可能是比较好拿
+               if(item.source === 'shuhaha'){
+                   sourceId = item._id;
+               }
+           }
+            chapters.sourceId = sourceId;
+            return fetch(`/api/toc/${sourceId}?view=chapters`)
+        })
+        .then(res => res.json())
+        .then(data => {
+            chapters.chapters = data;
+            let action = dispatch(addChapters(chapters));
+            dispatch(isShowLoading(false));
+            return action;
+        })
+        .catch(error => {
+            dispatch(isShowLoading(false));
+            new Error(error);
+        })
+
+}
+```
+
+```typescript jsx
+//redcer
+
+//书籍章节列表
+export const chaptersList = (state = {}, action) => {
+    switch (action.type){
+        case ADD_CHAPTERS_LIST:
+            return action.chapters;
+        default:
+            return state;
+    }
+}
+
+```
+
+编写功能模块之前前都应该先写好action和reducer 这样可以写组件的时候确定好方向。
+
+
+## 阅读页面 
+* 老规矩先编写action，reducer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

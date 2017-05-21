@@ -3,7 +3,8 @@ import {
     AUTO_COMPLETE,ADD_SEARCH_HISTORY,
     REMOVE_SEARCH_HISTORY,
     ADD_BOOK_LONG_INTRO ,
-    ADD_CHAPTERS_LIST
+    ADD_CHAPTERS_LIST,
+    ADD_READ_DETAIL
 } from './action';
 import { isInArr } from '../tools';
 import storejs from 'storejs';
@@ -105,6 +106,16 @@ export const chaptersList = (state = {}, action) => {
 }
 
 
+//详细阅读
+export const readDetail = (state = {}, action) => {
+    switch (action.type){
+        case ADD_READ_DETAIL:
+            action.readObj && storejs.set('readDetail', action.readObj);
+            return action.readObj.chapter;
+        default:
+            return state;
+    }
+}
 
 
 

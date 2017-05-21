@@ -4,6 +4,7 @@ import About from '../components/main/about/About';
 import BookIntro from '../components/main/bookIntro/BookIntro';
 import Read from '../components/main/read/Read';
 import ChangeOrigin from '../components/main/changeOrigin/ChangeOrigin';
+import ReadDetail from '../components/main/read/ReadDetail';
 const routes = [
     {
         path: '/search',
@@ -26,6 +27,10 @@ const routes = [
     },{
         path: '/changeOrigin',
         component: ChangeOrigin,
+        exact: true,
+    },{
+        path: '/readDetail/:id',
+        component: ReadDetail,
         exact: true,
     }
     ,{
