@@ -622,16 +622,66 @@ export const chaptersList = (state = {}, action) => {
 ## 阅读页面 
 * 老规矩先编写action，reducer
 
+```typescript jsx
 
+/*详细阅读*/
+export const getReadDetail = url => dispatch => {
+    if(url === '') return ;
+    dispatch(isShowLoading(true));
+    return fetch(`/chapter/${url}?k=2124b73d7e2e1945&t=1468223717`)
+        .then(res => res.json())
+        .then(data => {
+            let action = dispatch(readDetail(data));
+            dispatch(isShowLoading(false));
+            return action;
+        })
+        .catch(err=> {
+            dispatch(isShowLoading(false));
+            new Error(err)
+        });
 
+}
 
+```
+> 通过connect 传入的dispatch 方法触发一个getReadDetailaction <font color=deepPink>dispatch(getReadDetailaction(url)) </font> redux会直接调用reducer函数改变state
 
+```typescript jsx
+//详细阅读
+export const readDetail = (state = {}, action) => {
+    switch (action.type){
+        case ADD_READ_DETAIL:
+            action.readObj && storejs.set('readDetail', action.readObj);
+            return action.readObj.chapter;
+        default:
+            return state;
+    }
+}
+```
+> 触发action后reduer函数改变state我们的state就会增加一个和reduer处理函数名字一样的属性<font color=deepPink>readDetail </font>（这主要是combineReducers帮我们简化了一小部分，不懂需要去看看redux文档）state下图：
 
+![图](githubImgs/readDetail.png)
 
+* 这图中的`readDetail` 是action 请求到数据给reducer处理后的state
 
+###然后包装我们的组件
 
+```typescript jsx
+class ReadDetail extends Component {
+    // ...
+}
 
+const mapStateToProps = (state) => ({
+    readDetail:state.readDetail,
+})
 
+const mapDispatchToProps = (dispatch) => ({
+    getReadDetail:(id)=> dispatch(getReadDetail(id))
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(ReadDetail);
+```
+
+* 在需要的页面直接调用即可 当state改变时候组件就会自动更新
 
 
 

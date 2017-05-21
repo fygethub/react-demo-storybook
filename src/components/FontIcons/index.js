@@ -23,3 +23,21 @@ export const IconCancel = () => (
 export const IconMessage = () => (
     <FontIcon className="iconfont icon-message" />
 )
+
+
+export const IconMenu = () => (
+    <FontIcon className="iconfont icon-menu" />
+)
+
+
+export const IconSetUp = () => (
+    <FontIcon className="iconfont icon-shezhi" />
+)
+
+
+
+
+
+
+
+

@@ -22,7 +22,8 @@ class ReturnButton extends Component{
                 {/*<Link to="/">*/}
                     <FontIcon
                         className="iconfont icon-fanhui"
-                        color="var(--default-color)"
+                        color={this.props.color}
+
                     />
                 {/*</Link>*/}
             </IconButton>

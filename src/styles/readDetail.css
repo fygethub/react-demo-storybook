@@ -6,8 +6,23 @@
     width:100vw;
     height:100vh;
     overflow: auto;
+
 }
 
+.readDetailHeader{
+    background: darkgray;
+    position: absolute;
+    width:100%;
+    z-index:1;
+    background: darkgray;
+}
+
+.readDetailContent{
+    top:0;
+    bottom: 0;
+    position: absolute;
+    overflow: scroll;
+}
 
 .readDetailContent p{
     white-space: pre-line;
@@ -15,6 +30,36 @@
     text-indent: 2rem;
     padding:1rem;
 }
+
+.readDetailFooter{
+    width:100%;
+    position: absolute;
+    bottom:0;
+    background: darkgray;
+    z-index:1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.readDetailFooter dl{
+    text-align:center;
+    width:30%;
+}
+
+.readDetailFooter dl:hover{
+    background-color: gray;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

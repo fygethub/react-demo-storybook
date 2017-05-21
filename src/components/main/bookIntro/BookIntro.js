@@ -32,7 +32,7 @@ class BookIntro extends Component {
                     <AppBar
                         title="书籍详情"
                         style={{textAlign:'center'}}
-                        iconElementLeft={<ReturnButton history={this.props.history} />}
+                        iconElementLeft={<ReturnButton history={this.props.history} color="var(--default-color)" />}
                         iconElementRight={<Share />}
                         iconStyleRight={{marginTop:'1rem'}}
                     />
@@ -63,7 +63,7 @@ class BookIntro extends Component {
                 <AppBar
                     title="书籍详情"
                     style={{textAlign:'center'}}
-                    iconElementLeft={<ReturnButton history={this.props.history} />}
+                    iconElementLeft={<ReturnButton history={this.props.history} color="var(--default-color)" />}
                     iconElementRight={<Share />}
                     iconStyleRight={{marginTop:'1rem'}}
                 />

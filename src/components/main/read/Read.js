@@ -34,7 +34,7 @@ class Read extends Component {
                         <AppBar
                             title="章节列表"
                             titleStyle={{textAlign:'center',fontSize:'1.5rem',paddingRight:'1rem'}}
-                            iconElementLeft={<ReturnButton history={this.props.history} />}
+                            iconElementLeft={<ReturnButton history={this.props.history} color="var(--gray-dark)" />}
                         />
                     <ReactCssTransitionGroup
                         transitionName="fadeIn"
@@ -73,7 +73,7 @@ class Read extends Component {
                         <AppBar
                             title="章节列表"
                             titleStyle={{textAlign:'center',fontSize:'1.5rem',paddingRight:'1rem'}}
-                            iconElementLeft={<ReturnButton history={this.props.history} />}
+                            iconElementLeft={<ReturnButton history={this.props.history} color="var(--default-color)" />}
                         />
                     </div>
             );

@@ -31,7 +31,7 @@ class Search extends Component {
                 <AppBar
                     titleStyle={{display:'none'}}
                     children={<AutoCompleteClassWrap />}
-                    iconElementLeft={<ReturnButton history={this.props.history} />}
+                    iconElementLeft={<ReturnButton history={this.props.history} color="var(--default-color)" />}
                 />
                 <ReactCssTransitionGroup
                     transitionName="fadeIn"
