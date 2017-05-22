@@ -15,6 +15,7 @@
     width:100%;
     z-index:1;
     background: darkgray;
+    transition:.5s;
 }
 
 .readDetailContent{
@@ -35,10 +36,11 @@
     width:100%;
     position: absolute;
     bottom:0;
-    background: darkgray;
+    background: rgb(209, 209, 209);
     z-index:1;
     display: flex;
     justify-content: space-between;
+    transition: .5s;
 }
 
 .readDetailFooter dl{
@@ -50,7 +52,12 @@
     background-color: gray;
 }
 
-
+.changeFontSize{
+    display: flex;
+    align-items: center;
+    width: 80%;
+    justify-content: space-around;
+}
 
 
 

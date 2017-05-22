@@ -683,6 +683,10 @@ export default connect(mapStateToProps,mapDispatchToProps)(ReadDetail);
 
 * 在需要的页面直接调用即可 当state改变时候组件就会自动更新
 
+目前界面为下面的效果需要有修改背景颜色，改变字体大小等功能可以考虑一下怎么实现。
+
+![图](githubImgs/readDetail2.png)
+
 
 
 
