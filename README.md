@@ -4,6 +4,11 @@
 ## 创建仓库
  通过create-react-app创建初始环境， 安装antd UI库， 按照antd官网描述修改webpack配置按需加载。详细参照[antd](https://ant.design/docs/react/use-with-create-react-app-cn)
 
+## 总体效果图
+
+![效果图](githubImgs/all.gif)
+
+
 1、在src 文件下新建components文件夹在当前文件夹下面编写组件。
 2、在src 下新建source文件存放字体图片等资源
 
