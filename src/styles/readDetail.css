@@ -10,6 +10,8 @@
 }
 
 .readDetailHeader{
+    display: flex;
+    justify-content: space-between;
     background: darkgray;
     position: absolute;
     width:100%;
@@ -59,7 +61,11 @@
     justify-content: space-around;
 }
 
-
+.readDetailMenuLis{
+    width:100%;
+    height:100%;
+    overflow: scroll;
+}
 
 
 

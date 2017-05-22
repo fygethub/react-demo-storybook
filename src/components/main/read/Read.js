@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PureRender from 'tools/decorators';
-//import { Link } from 'react-router-dom';
 import { getChpters } from 'reduxs/action';
-import { IconMessage } from '../../FontIcons'
+import { IconMessage, IconHome } from '../../FontIcons'
 import AppBar from 'material-ui/AppBar';
 import Badge from 'material-ui/Badge';
 import ReturnButton from 'commont/ReturnButton';
@@ -18,11 +18,16 @@ class Read extends Component {
     componentDidMount() {
         let { match } = this.props;
         this.props.getChpters(match.params.id);
+        this.handleClickLi = this.handleClickLi.bind(this);
     }
 
     componentWillReceiveProps(nextprops){
         //let chapters = this.props.chaptersList;
         //console.log(nextprops);
+    }
+
+    handleClickLi(id) {
+        this.props.history.push('/readDetail/'+ id);
     }
 
     render(){
@@ -35,6 +40,7 @@ class Read extends Component {
                             title="章节列表"
                             titleStyle={{textAlign:'center',fontSize:'1.5rem',paddingRight:'1rem'}}
                             iconElementLeft={<ReturnButton history={this.props.history} color="var(--gray-dark)" />}
+                            iconElementRight={ <Link to="/" style={{padding:'.6rem',display:'inline-block'}}><IconHome /> </Link>}
                         />
                     <ReactCssTransitionGroup
                         transitionName="fadeIn"
@@ -46,8 +52,9 @@ class Read extends Component {
                         <div className="chapterContainer">
                                 <ul className="chapterUl">
                                     {
+
                                         chapters.chapters.map((chapter,i)=>
-                                            <li key={i} className="chapterList">
+                                            <li key={i} className="chapterList" onClick={()=> this.handleClickLi(encodeURIComponent(chapter.link))}>
                                                 <a><span>{chapter.title}</span></a>
                                                 <div className="limessage">
                                                     <Badge
@@ -74,6 +81,7 @@ class Read extends Component {
                             title="章节列表"
                             titleStyle={{textAlign:'center',fontSize:'1.5rem',paddingRight:'1rem'}}
                             iconElementLeft={<ReturnButton history={this.props.history} color="var(--default-color)" />}
+                            iconElementRight={ <Link to="/" style={{padding:'.6rem',display:'inline-block'}}><IconHome /> </Link>}
                         />
                     </div>
             );

@@ -1,6 +1,6 @@
-# react 动手学习最好的例子 
+# react 动手学习好的例子 
 
-> 看见[ShanaMaid]()写了一个react读书app， 自己借用API练习一下，记录练习过程。
+> 看见[ShanaMaid](https://github.com/ShanaMaid/oho-reader)写了一个react读书app， 自己借用API练习一下，记录练习过程。
 ## 创建仓库
  通过create-react-app创建初始环境， 安装antd UI库， 按照antd官网描述修改webpack配置按需加载。详细参照[antd](https://ant.design/docs/react/use-with-create-react-app-cn)
 
@@ -247,7 +247,7 @@ export const autoComplete = (name, completeList) => ({
 
 
 ```
- ### 异步action 这里分发异步action需要用到 middleware 作用是dispatch的时候可以传除对象外还可以是函数
+ ###  异步action 这里分发异步action需要用到 middleware 作用是dispatch的时候可以传除对象外还可以是函数
  下面是middleware src/redux/middleware/middleware.js
 ```typescript jsx
 export const thunk = (store) => next => action =>
@@ -406,7 +406,7 @@ export default App;
 
 ```
 
-### <font color=deepPink> 代码跑起来 npm start</font>
+###  <font color=deepPink> 代码跑起来 npm start</font>
 看到我们的控制台发现有个小警告说闭合标签前面需要有一个空格 果断跑去加一个 ![pic](githubImgs/测试redux逻辑.png);
 
 在看一次我们的请求都发出去了，reducer也接收到action后为我们处理了。
@@ -536,11 +536,11 @@ export const bookLongIntro = (state = {}, action) =>{
 store.dispatch(receiveBookLongIntro('57206c3539a913ad65d35c7b'));
 //然后看打印日志
 ```
-### 测试详细介绍
+###  测试详细介绍
 ![测试](githubImgs/longIntro.jpg)
 * 接下来要做的就是往自己写的详情页面塞数据，相信大家都能做到。
 
-###bug 遇到一个点击穿透的问题，当点击自动补全的列表时，实际上会点到下面介绍列表。
+### bug 遇到一个点击穿透的问题，当点击自动补全的列表时，实际上会点到下面介绍列表。
 ![bug](githubImgs/touchBug.gif)
 
 * 猜测是因为选择补全列表后移动设备有300ms延迟，在300ms内补全列表隐藏了所以就点击到查询列表项。
@@ -663,7 +663,7 @@ export const readDetail = (state = {}, action) => {
 
 * 这图中的`readDetail` 是action 请求到数据给reducer处理后的state
 
-###然后包装我们的组件
+### 然后包装我们的组件
 
 ```typescript jsx
 class ReadDetail extends Component {

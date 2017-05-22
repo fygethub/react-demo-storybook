@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import ReturnButton from 'commont/ReturnButton';
 import Share from 'commont/Share';
@@ -18,10 +17,18 @@ import 'styles/bookIntro.css'
 
 @PureRender
 class BookIntro extends Component {
+    constructor(props){
+        super(props);
+        this.handleStartRead = this.handleStartRead.bind(this);
+    }
 
     componentDidMount() {
         const { match } = this.props;
         this.props.onFetchBookIntro(match.params.id);
+    }
+
+    handleStartRead(id,name){
+        setTimeout(()=>this.props.history.push('/read/'+id),500);
     }
 
     render(){
@@ -96,7 +103,7 @@ class BookIntro extends Component {
                             <RaisedButton
                                 primary
                                 fullWidth
-                            ><Link to={'/read/'+_id}><i className="iconfont icon-llalbumdiggbtn" />开始阅读 </Link>
+                            ><a onClick={()=> this.handleStartRead(_id,title)}><i className="iconfont icon-llalbumdiggbtn" />开始阅读 </a>
                             </RaisedButton>
                         </div>
                     </div>

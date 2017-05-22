@@ -92,8 +92,11 @@ export const bookLongIntro = (state = {}, action) =>{
 //书籍章节列表
 export const chaptersList = (state = {}, action) => {
     switch (action.type){
-        case ADD_CHAPTERS_LIST:
+        case ADD_CHAPTERS_LIST:{
+            let focusBooks = storejs.get("focusBooks") || [];
+            focusBooks.push()
             return action.chapters;
+        }
         default:
             return state;
     }

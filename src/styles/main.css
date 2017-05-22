@@ -51,6 +51,7 @@
     border-top:.5rem solid var(--gray-lighter);
     display: flex;
     cursor:pointer;
+    border-bottom:1px solid var(--gray-lighter);
 }
 
 .liLeft{

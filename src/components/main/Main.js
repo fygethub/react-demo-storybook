@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
 import Bottom from './Bottom';
-import Divider from 'material-ui/Divider';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import ArrowDropRight from 'material-ui/svg-icons/navigation-arrow-drop-right';
 import ReactCssTransitionGrop from 'react-addons-css-transition-group';
 import 'styles/main.css';
 import 'styles/animate.css';
@@ -33,7 +31,7 @@ export default class Main extends Component {
                     title="看 看 看 看"
                     titleStyle={{textAlign:'center',fontSize:'1.5rem'}}
                     iconStyleLeft={{display:'none'}}
-                    iconElementRight={<VertMenu />}
+                    iconElementRight={<VertMenu history={this.props.history} />}
                 />
                 <div className="mainContent">
                     <div className="lunbo" style={{background:'url(http://pic.58pic.com/58pic/13/85/85/73T58PIC9aj_1024.jpg)'}} />
@@ -52,17 +50,11 @@ export default class Main extends Component {
                     </div>
                     <div className="recommendListContent">
                         <ul>
-                            <BookListItemMain item={{ imgUrl:'http://image.cmfu.com/books/3330580/3330580.jpg',
-                                    hTitle:"道界天下", sortIntro: "神秘村落中走出的神秘少年，道心没有，道灵不惧，道体不通，却一心求道，拜入问道宗，踏入一条与众不同的...神秘村落中走出的神秘少年，道心没有，道灵不惧，道体不通，却一心求道，拜入问道宗，踏入一条与众不同的...",
-                                    author:'夜行月',
+                            <BookListItemMain item={{ imgUrl:'http://img.17k.com/images/bookcover/default_cover1.jpg',
+                                    hTitle:"Hello World", sortIntro: "Hello World",
+                                    author:'fydor',
                                     word:'17.3万'
                                 }}
-                            />
-                            <BookListItemMain item={{ imgUrl:'http://image.cmfu.com/books/3330580/3330580.jpg',
-                                hTitle:"Hello World", sortIntro: "神秘村落中走出的神秘少年，道心没有，道灵不惧，道体不通，却一心求道，拜入问道宗，踏入一条与众不同的...神秘村落中走出的神秘少年，道心没有，道灵不惧，道体不通，却一心求道，拜入问道宗，踏入一条与众不同的...",
-                                author:'夜行月',
-                                word:'17.3万'
-                             }}
                             />
                         </ul>
                     </div>
@@ -95,31 +87,17 @@ export default class Main extends Component {
 
 
 /*header 右侧的菜单组件*/
-
-const VertMenu = (props) => (
+/* eslint-disable */
+const VertMenu = ({history}) => (
     <div>
-
         <IconMenu
-            {...props}
             iconButtonElement={
                 <IconButton> <MoreVertIcon /> </IconButton>
             }
             targetOrigin={{horizontal: 'right', vertical: 'top'}}
             anchorOrigin={{horizontal: 'right', vertical: 'top'}}
         >
-            <MenuItem primaryText="Refresh" />
-            <Divider />
-            <MenuItem
-                primaryText="About"
-                rightIcon={
-                    <ArrowDropRight />
-                }
-                menuItems={[
-                    <MenuItem primaryText="About Author" />,
-                    <Divider />,
-                    <MenuItem primaryText="About Material-UI" />
-                ]}
-            />
+            <MenuItem primaryText="About Author" onTouchTap={()=> history.push('/about')} />
         </IconMenu>
     </div>
 

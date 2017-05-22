@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PureRender from 'tools/decorators';
 import { getReadDetail } from 'reduxs/action';
+import Dialog from 'material-ui/Dialog';
 import ReturnButton from 'commont/ReturnButton';
 import FlatButton from 'material-ui/FlatButton';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import Badge from 'material-ui/Badge';
-import { IconMenu, IconSetUp, IconMessage } from '../../FontIcons';
+import { IconMenu, IconSetUp, IconMessage,IconHome } from '../../FontIcons';
 import 'styles/readDetail.css'
 
 
@@ -17,6 +19,7 @@ class ReadDetail extends Component {
     constructor(props){
         super(props);
         this.state = {
+            open: false,
             isShowHeader: false,
             isShowFooter: false,
             isShowFooterSetUp: false,
@@ -24,6 +27,7 @@ class ReadDetail extends Component {
             valueSelect:'default',
         }
         this.handleRadioChange = this.handleRadioChange.bind(this);
+        this.handleSelectList = this.handleSelectList.bind(this);
         this.handleClickMenu = this.handleClickMenu.bind(this);
         this.handleClickSetUp = this.handleClickSetUp.bind(this);
         this.handleAddFontSize = this.handleAddFontSize.bind(this);
@@ -38,6 +42,20 @@ class ReadDetail extends Component {
         match.params && this.props.getReadDetail(match.params.id);
     }
 
+    handleSelectList(e) {
+        let i = 0;
+        while (!e.target.dataset.id && i < 5){
+            e.target = e.target.parentNode;
+            i++;
+        }
+        this.props.history.push('/readDetail/' + encodeURIComponent(e.target.dataset.id));
+        this.props.getReadDetail(e.target.dataset.id);
+        this.setState({
+            open:false,
+            isShowHeader: false,
+            isShowFooter: false,
+        })
+    }
 
     handleClickContainer() {
         this.setState({
@@ -85,12 +103,17 @@ class ReadDetail extends Component {
 
     handleClickMenu(e){
         e.stopPropagation();
-
+        this.setState({open: true});
     }
 
     handleClickAssess(e){
         e.stopPropagation();
     }
+
+    handleClose = () => {
+        this.setState({open: false});
+    };
+
     render(){
         const { readDetail } = this.props;
         let hideStyleHeader = {
@@ -105,14 +128,14 @@ class ReadDetail extends Component {
         let fontColor = '#a0a064',background:'whitesmoke';
         fontColor = this.state.valueSelect === 'default' ? 'gray' : (this.state.valueSelect === 'light' ? '#000' : '#a0a064');
         background = this.state.valueSelect === 'default' ? 'whitesmoke' : (this.state.valueSelect === 'light' ? '#ffffff' : '#000');
-
         if(readDetail && this.props.readDetail.title){
             return (<div className="readDetailContainer" onClick={this.handleClickContainer}>
                         <div className="readDetailHeader" style={this.state.isShowHeader ? styleInit: hideStyleHeader }>
-                            <ReturnButton color="var(--default-color)" />
+                            <ReturnButton color="var(--default-color)" {...this.props} />
+                            <Link to="/" style={{padding:'1rem'}}><IconHome /></Link>
                         </div>
                         <div className="readDetailContent">
-                            <h2>{this.props.readDetail.title}</h2>
+                            <h2 style={{fontSize:this.state.fontSize + 'rem',color:fontColor,background:background}}>{this.props.readDetail.title}</h2>
                             <p style={{fontSize:this.state.fontSize + 'rem',color:fontColor,background:background}}>
                                 {this.props.readDetail.cpContent ? this.props.readDetail.cpContent : this.props.readDetail.body}
                             </p>
@@ -174,12 +197,34 @@ class ReadDetail extends Component {
                                     />
                                     <RadioButton
                                         value="dark"
-                                        label="黑暗"
+                                        label="护眼"
                                         style={{width:'8rem'}}
                                     />
                                 </RadioButtonGroup>
                             </div>
                         </div>
+                        <Dialog
+                            title="目录章节"
+                            modal={false}
+                            open={this.state.open}
+                            onRequestClose={this.handleClose}
+                            autoScrollBodyContent
+                        >
+                            <div className="readDetailMenuLis">
+                            {
+                                this.props.chaptersList && this.props.chaptersList.chapters && this.props.chaptersList.chapters.chapters &&
+                                    this.props.chaptersList.chapters.chapters.map((chapter,i)=>
+                                        <li key={i} className="chapterList" onClick={(e)=>this.handleSelectList(e)} data-id={chapter.link} >
+                                            <a>
+                                                <span>{chapter.title}</span>
+                                            </a>
+                                        </li>
+                                    )
+
+                            }
+                        </div>
+
+                        </Dialog>
                     </div>);
         }
 
@@ -192,6 +237,7 @@ class ReadDetail extends Component {
 
 const mapStateToProps = (state) => ({
     readDetail:state.readDetail,
+    chaptersList: state.chaptersList
 })
 
 const mapDispatchToProps = (dispatch) => ({
