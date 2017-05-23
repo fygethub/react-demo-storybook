@@ -1,12 +1,11 @@
-# react 动手学习好的例子 
+# [react+reudx+router+material-ui+es6、7](https://github.com/fygethub/storyViaAntdReact) 
+初学者用来做练习很不错，因为我就是。
 
-> 看见[ShanaMaid](https://github.com/ShanaMaid/oho-reader)写了一个react读书app， 自己借用API练习一下，记录练习过程。
-## 创建仓库
- 通过create-react-app创建初始环境， 安装antd UI库， 按照antd官网描述修改webpack配置按需加载。详细参照[antd](https://ant.design/docs/react/use-with-create-react-app-cn)
+> 看见[ShanaMaid](https://github.com/ShanaMaid/oho-reader)写了一个react读书app， 自己借用API练习一下，记录练习过程。https://github.com/fygethub/storyViaAntdReact
+## [创建仓库 ](https://github.com/fygethub/storyViaAntdReact)
+ 通过create-react-app创建初始环境， 安装material UI库， 按照material官网描述修改webpack配置按需加载。详细参照[material-ui](http://www.material-ui.com/#/)
 
-## 总体效果图
-
-![效果图](githubImgs/all.gif)
+![效果图](http://oqdxgyhtl.bkt.clouddn.com/all3.gif)
 
 
 1、在src 文件下新建components文件夹在当前文件夹下面编写组件。
@@ -79,7 +78,7 @@ const Routers = () => (
 export default Routers;
 ```
 这样配置可以直接在配置文件中添加路由，由于只有一层路由所以对象中没有继续嵌套routes（嵌套的意思是在当前显示的组件下面还有需要通过url匹配显示的组件）路由嵌套可以参照
-<font color=deepPink>[react-router-dom route-config](https://reacttraining.com/react-router/web/example/route-config)</font>
+[react-router-dom route-config](https://reacttraining.com/react-router/web/example/route-config)
 
 目前位置目录结构如下
 ```
@@ -134,9 +133,9 @@ export default Routers;
 
 ```
 .运行npm start,此时，你编写的jsx文件都是经过.eslintrc的配置限制
-<font color=deepPink> `ps: 配置的value对应的值： 0 : off 1 : warning 2 : error`</font>
+`ps: 配置的value对应的值： 0 : off 1 : warning 2 : error`
 不满足以下的规范设置的，编译代码时将有黄色提示
-<font color=deepPink> 
+
 <pre>
     "extends": "react-app",
            "rules": {
@@ -153,14 +152,14 @@ export default Routers;
            }
          }
 </pre>
-</font>
 
 
-## 通过material UI 去对页面布局
+
+### 通过material UI 去对页面布局
 * 书籍详情页
 * 查询列表页
 
-## 页面写好了以后肯定就是写功能了，功能我们不一次性去写完而是用到什么添加什么
+### 页面写好了以后肯定就是写功能了，功能我们不一次性去写完而是用到什么添加什么
  目前书籍搜索页面布局好了以后开始添加功能,不知不觉自己的文件就变得多了。
  
  这里普及一下生成图形目录的工具 用的是tree 工具
@@ -221,7 +220,7 @@ export default Routers;
 └── yarn.lock
 
 ```
-##编写需要用到的action
+### 编写需要用到的action
 > 这里目前用到的action有获取书籍列表receiveBookList 是否显示加载框 isShowLoading
 自动不全 autoComplete 以上都是同步action 
 ```typescript jsx
@@ -270,7 +269,7 @@ export const logger = (store) => next => action => {
 }
 ```
 
->有了上面的middleware 就可以编写异步action了同样在 src/redux/action.js中添加
+> 有了上面的middleware 就可以编写异步action了同样在 src/redux/action.js中添加
 ```typescript jsx
 export const receiveAutoComplete = name => dispatch =>
     fetch(`book/auto-complete?query=${name}`)
@@ -297,7 +296,7 @@ export const getBookList = (name) => dispatch => {
 
 ```
 
-> action编写完毕 接下来就应该编写reducer ，reducer意思是通过action计算出下次的state由于我们会用到<font color=deepPink>conbinereducer</font>所以
+> action编写完毕 接下来就应该编写reducer ，reducer意思是通过action计算出下次的state由于我们会用到conbinereducer所以
 可以向下面的方式编写
 src/redux/reducer.js
 ```typescript jsx
@@ -335,7 +334,7 @@ export const isLoading = (state = false,action) => {
 
 ```
 
->生成store底层步骤写完后下面就开始创建出我们需要的store了,创建store需要<font color=deepPink>redux 里面的方法</font>
+> 生成store底层步骤写完后下面就开始创建出我们需要的store了,创建store需要redux 里面的方法
 ```typescript jsx
 
 //src/redux/store.js
@@ -350,7 +349,7 @@ let store = createStore(
 export default store;
 
 ```
->好了该有的方法我们都创建完毕在App文件中来测试一下❤先 ， 跟着我默念一遍咒语
+> 好了该有的方法我们都创建完毕在App文件中来测试一下❤先 ， 跟着我默念一遍咒语
 > 神兽保佑🙏代码一次过
 
 ```typescript jsx
@@ -411,15 +410,15 @@ export default App;
 
 ```
 
-###  <font color=deepPink> 代码跑起来 npm start</font>
-看到我们的控制台发现有个小警告说闭合标签前面需要有一个空格 果断跑去加一个 ![pic](githubImgs/测试redux逻辑.png);
+### 代码跑起来 npm start
+看到我们的控制台发现有个小警告说闭合标签前面需要有一个空格 果断跑去加一个 ![pic](http://oqdxgyhtl.bkt.clouddn.com/all%E6%B5%8B%E8%AF%95redux%E9%80%BB%E8%BE%91.png);
 
 在看一次我们的请求都发出去了，reducer也接收到action后为我们处理了。
-![](githubImgs/测试redux.png);
+![](http://oqdxgyhtl.bkt.clouddn.com/all%E6%B5%8B%E8%AF%95redux.png);
 
 
 
-## 继续编写搜索页面并优化
+### 继续编写搜索页面并优化
 *  点击搜索发送一个搜索action reducer处理后search组件获取到书籍数据显示到列表
 * 优化书籍自动补全时候输入框每输入一个字符都要发送action 增加一个延时发送效果<font color=deepPink>主要方法：当输入停止后350毫秒搜索，每当输入时都清除定时器然后在添加一个定时器</font>
 ```typescript jsx
@@ -450,7 +449,7 @@ export default App;
 class AutoCompleteClass extends Component {}
 ```
 
-##下面是一个实现的方法，也可以解释为 <font color=deepPink>[高阶函数Higher Order Components ](https://medium.com/@franleplant/react-higher-order-components-in-depth-cf9032ee6c3e)</font>
+## [高阶函数Higher Order Components ](https://medium.com/@franleplant/react-higher-order-components-in-depth-cf9032ee6c3e)编写PureRender
 ```typescript jsx
 
 //src/tools/decorators.js
@@ -485,20 +484,20 @@ export default PureRender;
 
 ```
 
-## 搜索页面，添加历史搜索页和推荐列表需要做如下操作：
+## 搜索页面、添加历史搜索页和推荐列表
 * 历史搜索页面布局
 * 新增历史搜索的action 和 reducer
 
-![历史搜索页和推荐列表](githubImgs/历史搜索.png)
-如果state中没有搜索列表就显示推荐列表和历史记录，历史记录还没添加本地缓存功能。
+![历史搜索页和推荐列表](http://oqdxgyhtl.bkt.clouddn.com/all%E5%8E%86%E5%8F%B2%E6%90%9C%E7%B4%A2.png)
+> 如果state中没有搜索列表就显示推荐列表和历史记录，历史记录还没添加本地缓存功能。
 添加历史记录功能后search组件中布局内容多了起来，因此把历史和列表显示拆分成两个不通的组件，这也符合渐进式推进自己的项目。
 
 
 
 -------------------------
-##接下来添加点击搜索列表跳转书籍详情页
+## 搜索列表跳转书籍详情页
 * 准备用Link 标签跳转到详情页，点击的同时发送一个请求书籍详情的action 然后显示在详情页。布局如下并添加action与reducer函数
-![书籍详情](githubImgs/bookintro.jpg)
+![书籍详情](https://github.com/fygethub/storyViaAntdReact/blob/master/githubImgs/bookintro.jpg)
 
 ```typescript jsx
 // src/redux/action.js 新增
@@ -542,11 +541,11 @@ store.dispatch(receiveBookLongIntro('57206c3539a913ad65d35c7b'));
 //然后看打印日志
 ```
 ###  测试详细介绍
-![测试](githubImgs/longIntro.jpg)
+![测试](http://oqdxgyhtl.bkt.clouddn.com/alllongIntro.jpg)
 * 接下来要做的就是往自己写的详情页面塞数据，相信大家都能做到。
 
 ### bug 遇到一个点击穿透的问题，当点击自动补全的列表时，实际上会点到下面介绍列表。
-![bug](githubImgs/touchBug.gif)
+![bug](http://oqdxgyhtl.bkt.clouddn.com/alltouchBug.gif)
 
 * 猜测是因为选择补全列表后移动设备有300ms延迟，在300ms内补全列表隐藏了所以就点击到查询列表项。
 试了好几种解决办法 发现不是什么300ms的问题。因为通过router 的 history.push() 方法延迟跳转后还是会跳转，感觉就是直接点击到上面的。
@@ -662,9 +661,9 @@ export const readDetail = (state = {}, action) => {
     }
 }
 ```
-> 触发action后reduer函数改变state我们的state就会增加一个和reduer处理函数名字一样的属性<font color=deepPink>readDetail </font>（这主要是combineReducers帮我们简化了一小部分，不懂需要去看看redux文档）state下图：
+> 触发action后reduer函数改变state我们的state就会增加一个和reduer处理函数名字一样的属性readDetail（这主要是combineReducers帮我们简化了一小部分，不懂需要去看看redux文档）state下图：
 
-![图](githubImgs/readDetail.png)
+![图](http://oqdxgyhtl.bkt.clouddn.com/allreadDetail.png)
 
 * 这图中的`readDetail` 是action 请求到数据给reducer处理后的state
 
@@ -690,12 +689,19 @@ export default connect(mapStateToProps,mapDispatchToProps)(ReadDetail);
 
 目前界面为下面的效果需要有修改背景颜色，改变字体大小等功能可以考虑一下怎么实现。
 
-![图](githubImgs/readDetail2.png)
+![图](http://oqdxgyhtl.bkt.clouddn.com/allreadDetail2.png)
 
 
 
+## 涉及到的知识点
 
+* [react](https://facebook.github.io/react/)
+* [react-router-dom](https://github.com/ReactTraining/react-router)
+* [redux](https://github.com/reactjs/redux)
+* [react-redux](https://github.com/reactjs/react-redux)
+* [es6](http://es6-features.org/)
 
+> 大家看到这里改给个小星星了😄 ㊗️大家的代码没有bug，撸生中没有改需求。
 
 
 
