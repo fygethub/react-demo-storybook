@@ -5,8 +5,8 @@ var httpProxyMiddleware = require('http-proxy-middleware');
 var openBrowser = require('react-dev-utils/openBrowser');
 var DIR = process.cwd();
 
-//提供静态文件服务，这样就能找到你的`js`文件
-app.use(express.static(path.resolve(DIR,'../','build')));
+//提供静态文件服务，这样就能找到你的文件
+app.use(express.static(path.resolve(DIR,'build')));
 var optionProxy = {
         proxy: {
             '/api': {
@@ -47,7 +47,7 @@ app.all('*', function(req, res, next) {
 
 
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve(DIR,'../','build','index.html'));
+    res.sendFile(path.resolve(DIR,'index.html'));
 })
 
 
