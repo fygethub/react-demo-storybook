@@ -49,6 +49,7 @@
   "dependencies": {
     "antd": "^2.9.3",
     "express": "^4.15.3",
+    "http-proxy": "^1.16.2",
     "material-ui": "^0.18.0",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",

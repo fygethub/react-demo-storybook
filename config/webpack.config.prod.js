@@ -84,10 +84,10 @@ module.exports = {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
-        'style': path.join(ROOT_PATH,'src/styles'),
-        'tools': path.join(ROOT_PATH,'src/tools'),
-        'commont': path.join(ROOT_PATH,'src/components/commont'),
-        'reduxs': path.join(ROOT_PATH,'src/redux'),
+      'styles': path.join(ROOT_PATH,'src/styles'),
+      'tools': path.join(ROOT_PATH,'src/tools'),
+      'commont': path.join(ROOT_PATH,'src/components/commont'),
+      'reduxs': path.join(ROOT_PATH,'src/redux'),
     }
   },
   
