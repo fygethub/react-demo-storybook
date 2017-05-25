@@ -4,7 +4,7 @@
 > 看见[ShanaMaid](https://github.com/ShanaMaid/oho-reader)写了一个react读书app， 自己借用API练习一下，记录练习过程。https://github.com/fygethub/storyViaAntdReact
 ## [创建仓库 ](https://github.com/fygethub/storyViaAntdReact)
  通过create-react-app创建初始环境， 安装material UI库， 按照material官网描述修改webpack配置按需加载。详细参照[material-ui](http://www.material-ui.com/#/)
-
+![tu](https://sfault-image.b0.upaiyun.com/213/634/213634810-5924d283b0cea_articlex)
 ![效果图](http://oqdxgyhtl.bkt.clouddn.com/all3.gif)
 
 
