@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var httpProxyMiddleware = require('http-proxy-middleware');
+var openBrowser = require('react-dev-utils/openBrowser');
 var DIR = process.cwd();
 
 //提供静态文件服务，这样就能找到你的`js`文件
@@ -52,6 +53,7 @@ app.get('/', (req, res) => {
 
 app.listen(3001,function () {
     console.log('listen 3001');
+    openBrowser('http://localhost'  + ':' + 3001 + '/');
 });
 
 
