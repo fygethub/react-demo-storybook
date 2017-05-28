@@ -3,7 +3,7 @@ var app = express();
 var path = require('path');
 var httpProxyMiddleware = require('http-proxy-middleware');
 var openBrowser = require('react-dev-utils/openBrowser');
-var DIR = process.cwd();
+var DIR = process.cwd()
 
 //提供静态文件服务，这样就能找到你的文件
 app.use(express.static(path.resolve(DIR,'build')));
