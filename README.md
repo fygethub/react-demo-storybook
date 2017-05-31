@@ -11,7 +11,7 @@
 
 
 1、在src 文件下新建components文件夹在当前文件夹下面编写组件。
-2、在src 下新建source文件存放字体图片等资源
+2、在src 下新建source文件存放字体图片等资源.
 
 
 3. 新建一个router文件配置路由跳转。路由用的是react-route-dom 也就是react-router 的升级版本，路由在我的理解就是通过url来匹配组件的显示这是下面是路由配置文件
