@@ -10,7 +10,7 @@
 ![效果图](http://oqdxgyhtl.bkt.clouddn.com/all3.gif)
 
 
-1、在src 文件下新建components文件夹在当前文件夹下面编写组件。
+1、在src 文件下新建components文件夹在当前文件夹下面编写组件
 2、在src 下新建source文件存放字体图片等资源.
 
 
