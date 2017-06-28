@@ -6,6 +6,15 @@ import 'styles/search.css';
 /*推荐列表*/
 /* eslint-disable */
 class RecommendAndHistory extends Component {
+
+    handleSearchTap = (name) => () => {
+        this.props.onSearchBook(name);
+    }
+
+    handleRequestDelete = (name) => () => {
+        this.props.onRequestDelete(name);
+    }
+
     render(){
         let style = {backgroundColor:"white",border:'1px solid var(--gray-lighter)'};
         let redStyle = {backgroundColor:"white",border:'1px solid var(--brand-danger)',color:'var(--brand-danger)'}
@@ -23,7 +32,7 @@ class RecommendAndHistory extends Component {
                         this.props.otherSearch.map((name,i) =>(
                             <li key={i}>
                                 <Chip
-                                    onTouchTap={()=>{this.props.onSearchBook(name)}}
+                                    onTouchTap={this.handleSearchTap(name)}
                                     labelStyle={i<=1 ? {color:'red'}: null}
                                     style={i<=1? redStyle: null}
                                 >{name}</Chip>
@@ -41,8 +50,8 @@ class RecommendAndHistory extends Component {
                             this.props.historyList.map((name,i)=> (
                                 <li key={i}>
                                     <Chip
-                                        onTouchTap={()=>{this.props.onSearchBook(name)}}
-                                        onRequestDelete={() => this.props.onRequestDelete(name)}
+                                        onTouchTap={this.handleSearchTap(name)}
+                                        onRequestDelete={this.handleRequestDelete(name)}
                                     >{ name }</Chip>
                                 </li>
                             ))
