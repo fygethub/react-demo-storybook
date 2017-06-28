@@ -13,7 +13,7 @@ class Bottom extends Component {
         }
     }
 
-    select = (index) => {
+    select = (index)=> () => {
         this.setState({selectIndex: index});
        setTimeout(function () {
            index === 1 && this.props.history.push(`/search`);
@@ -31,17 +31,17 @@ class Bottom extends Component {
                     <BottomNavigationItem
                         label="home"
                         icon={<Link to="/"><IconHome /></Link>}
-                        onTouchTap={()=> this.select(0)}
+                        onTouchTap={this.select(0)}
                     />
                     <BottomNavigationItem
                         label="search"
                         icon={<IconSearch />}
-                        onTouchTap={()=> this.select(1)}
+                        onTouchTap={this.select(1)}
                     />
                     <BottomNavigationItem
                         label="read"
                         icon={<IconRead />}
-                        onTouchTap={()=> this.select(2)}
+                        onTouchTap={this.select(2)}
                     />
                 </BottomNavigation>
             </Paper>
