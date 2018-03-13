@@ -439,7 +439,8 @@ export default App;
     /*输入框延处理*/
     handleAutoSearchDelay = (time) => {
         const { dispatch } = this.props;
-        this.inputTimer = setTimeout( () => {
+        clearTimeout(this.inputTimer);
+        this.inputTimer = setTimeout( () => {
             dispatch(receiveAutoComplete(this.state.searchText));
         },time);
     }
@@ -703,7 +704,7 @@ export default connect(mapStateToProps,mapDispatchToProps)(ReadDetail);
 * [react-redux](https://github.com/reactjs/react-redux)
 * [es6](http://es6-features.org/)
 
-> 大家看到这里改给个小星星了😄 ㊗️大家的代码没有bug，撸生中没有改需求。
+> 大家看到这里希望大家给个小星星支持一下😄 ㊗️大家的代码没有bug，撸生中没有改需求。
 
 
 
